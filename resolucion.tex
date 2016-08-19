@@ -1,18 +1,38 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage[paper=a4paper, left=1.5cm, right=1.5cm, bottom=1.5cm, top=3.5cm]{geometry}
-\usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
 \usepackage{indentfirst}
 \usepackage{fancyhdr}
 \usepackage{latexsym}
 \usepackage{lastpage}
-\usepackage{aed2-symb,aed2-itef,aed2-tad}
 \usepackage[colorlinks=true, linkcolor=blue]{hyperref}
 \usepackage{calc}
+\usepackage{aed2-symb,aed2-itef,aed2-tad, caratula}
+\usepackage[utf8]{inputenc}
+
+% Estos comandos deben ir antes del \maketitle
+\materia{Algoritmos y Estructuras de Datos II} % obligatorio
+\submateria{Segundo Cuatrimestre de 2016} % opcional
+\titulo{Trabajo Práctico 1} % obligatorio
+\subtitulo{Especificación} % opcional
+
+\integrante{Integrante 1}{Nro/YY}{mail@dc.uba.ar} % obligatorio 
+\integrante{Integrante 2}{Nro/YY}{mail@dc.uba.ar} % obligatorio 
+\integrante{Integrante 3}{Nro/YY}{mail@dc.uba.ar} % obligatorio 
+\integrante{Integrante 4}{Nro/YY}{mail@dc.uba.ar} % obligatorio 
+
 
 \begin{document}
 
+\maketitle
+
+% compilar 2 veces para actualizar las referencias
+\tableofcontents
+
+\pagebreak
+
+%\newpage
 \input{tads/PokemonGo}
 
 \end{document}
