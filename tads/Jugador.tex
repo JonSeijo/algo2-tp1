@@ -1,0 +1,52 @@
+
+\begin{tad}{\tadNombre{Jugador}}
+\tadGeneros{jugador}
+
+\tadIgualdadObservacionalSimple{}
+\tadAlinearFunciones{crearJugador}{String/nombre,coord}{}{jugador}
+
+\tadObservadores
+\tadOperacion{sanciones}{jugador}{nat}{}
+\tadOperacion{conectado}{jugador}{bool}{}
+\tadOperacion{posicion}{jugador}{coordenada}{}
+
+
+
+
+\tadGeneradores
+
+\tadOperacion{crearJugador}{String/nombre,coord}{jugador}{}
+\tadOperacion{sancionar}{jugador}{jugador}{}
+\tadOperacion{conectar}{jugador/j, coord}{jugador}{$\neg$ conectado(j)}
+\tadOperacion{mover}{jugador,coord}{jugador}{}
+
+
+
+\tadOtrasOperaciones
+\tadOperacion{desconectar}{jugador/j}{jugador}{conectado(j)}
+
+\tadAxiomas[\paratodo{jugador}{j}, \paratodo{String}{s}, \paratodo{coord}{c}] 
+
+\tadAlinearAxiomas{desconectar(sancionar(j)))~}
+
+\tadAxioma{sanciones(crear(s, c))}{0}
+\tadAxioma{sanciones(conectar(j, c))}{sanciones(j)}
+\tadAxioma{sanciones(mover(j, c))}{sanciones(j)}
+\tadAxioma{sanciones(sancionar(j))}{1 + sanciones(j)}
+
+\tadAxioma{conectado(crear(s, c))}{false}
+\tadAxioma{conectado(sancionar(j))}{conectado(j)}
+\tadAxioma{conectado(mover(j, c))}{conectado(j)}
+\tadAxioma{conectado(conectar(j, c))}{true}
+
+\tadAxioma{posicion(crear(s, c))}{c}
+\tadAxioma{posicion(sancionar(j))}{posicion(j)}
+\tadAxioma{posicion(mover(j, c))}{c}
+\tadAxioma{posicion(conectar(j, c))}{c}
+
+\tadAxioma{desconectar(crear(s, c))}{crear(s, c)}
+\tadAxioma{desconectar(sancionar(j))}{sancoinar(desconectar(j))}
+\tadAxioma{desconectar(mover(j, c))}{mover(desconectar(j), c)}
+\tadAxioma{desconectar(conectar(j, c))}{desconectar(j)}
+
+\end{tad}
