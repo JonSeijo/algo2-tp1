@@ -48,7 +48,6 @@
 \tadAxioma{posicion(capturar(j, p))}{posicion(j)}
 \tadAxioma{posicion(conectar(j, c))}{c}
 
-
 \tadAxioma{desconectar(crear(s, c))}{crear(s, c)}
 \tadAxioma{desconectar(sancionar(j))}{sancoinar(desconectar(j))}
 \tadAxioma{desconectar(mover(j, c))}{mover(desconectar(j), c)}
@@ -61,7 +60,6 @@
 \tadAxioma{nombre(mover(j, c))}{nombre(j)}
 \tadAxioma{nombre(capturar(j, p))}{nombre(j)}
 \tadAxioma{nombre(sancionar(j))}{nombre(j)}
-
 
 \tadAxioma{capturados(crear(s, c))}{\secuencia{}}
 \tadAxioma{capturados(conectar(j, c))}{\secuencia{} \circulito  capturados(j)}

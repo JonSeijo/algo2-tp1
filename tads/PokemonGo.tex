@@ -3,16 +3,24 @@
 \tadGeneros{pkg}
 
 \tadIgualdadObservacionalSimple{$(true \igobs true) \land (false \igobs false) \land \neg(true \igobs false) \land \neg(false \igobs true)$}
-\tadAlinearFunciones{\argumento $\impluego$ \argumento}{bool,$\alpha$,$\alpha$}{bool}
+\tadAlinearFunciones{pertenecePokemon}{kg, pokemon/p}{conj(jugador)}
+
+\tadObservadores
+\tadOperacion{mapa}{pkg}{mapa}{}
+\tadOperacion{jugadores}{pkg}{conj(jugador)}{}
+\tadOperacion{pokemones}{pkg}{}{}
+
 \tadGeneradores
 
-\tadOperacion{}{}{}{}
-\tadOperacion{}{}{}{}
+\tadOperacion{crearPokemonGo}{mapa}{pkg}{}
+\tadOperacion{agregarPokemon}{pkg, pokemon/p}{pkg}{$\neg$ pertenecePokemon(p)}
+\tadOperacion{agregarJugador}{pkg, jugador/j}{pkg}{$\neg$ perteneceJugador(j)}
 
 \tadOtrasOperaciones
-\tadOperacion{}{}{}{}
+\tadOperacion{pertenecePokemon}{pokemon}{bool}{}
+\tadOperacion{perteneceJugador}{jugador}{bool}{}
 
-\tadAxiomas[\paratodo{pkg}{x,y}]
+\tadAxiomas[\paratodo{pkg}{pg}]
 
 \tadAlinearAxiomas{}
 \tadAxioma{}{}
