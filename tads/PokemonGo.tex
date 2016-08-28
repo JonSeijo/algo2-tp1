@@ -3,7 +3,7 @@
 \tadGeneros{pkg}
 
 \tadIgualdadObservacionalSimple{$(true \igobs true) \land (false \igobs false) \land \neg(true \igobs false) \land \neg(false \igobs true)$}
-\tadAlinearFunciones{pertenecePokemon}{kg, pokemon/p}{conj(jugador)}
+%\tadAlinearFunciones{pertenecePokemon}{kg, pokemon/p}{conj(jugador)}
 
 \tadObservadores
 \tadOperacion{mapa}{pkg}{mapa}{}
@@ -12,7 +12,7 @@
 
 \tadGeneradores
 
-\tadOperacion{crearPokemonGo}{mapa}{pkg}{}
+\tadOperacion{crearPGO}{mapa}{pkg}{}
 \tadOperacion{agregarPokemon}{pkg, pokemon/p}{pkg}{$\neg$ pertenecePokemon(p)}
 \tadOperacion{agregarJugador}{pkg, jugador/j}{pkg}{$\neg$ perteneceJugador(j)}
 
@@ -23,7 +23,7 @@
 
 
 \tadOperacion{sancionarJug}{pgo,jugador}{pgo}{}  %quiza no necesario, reemplazado por aplicarsancion%
-\tadOperacion{moverJug}{pgo,jugador,coordenada}{pgo}{}
+\tadOperacion{moverJugador}{pgo,jugador,coordenada}{pgo}{}
 \tadOperacion{conectarJug}{pgo, jugador}{pgo}{}
 \tadOperacion{desconectarJug}{pgo, jugador}{pgo}{} $\newline $
 
@@ -41,15 +41,31 @@
 
 \tadAxiomas[\paratodo{pkg}{pg}]
 
-\tadAlinearAxiomas{}
-\tadAxioma{}{}
-\tadAxioma{}{}
+%\tadAlinearAxiomas{}
 
-\tadAxioma{}{}
-\tadAxioma{}{}
+%mover(j) es el generador de jugador
+$ $\newline
+\tadAxioma{moverJugador($pgo$, $j$, $npos$)}
+{\IF movimientoValido(mapa($pgo$), posicion($j$), $npos$)  THEN 
+manejarCapturas($pgo$, $j$, mover($j$, $npos$))
+ELSE 
+aplicarSancion($pgo$, $j$) 
+FI
+}
 
-\tadAxioma{}{}
-\tadAxioma{}{}
+% AplicarSancion
+$ $\newline
+\tadAxioma{aplicarSancion(crearPGO($mapa$),$j$)}{crearPGO($mapa$)}
+\tadAxioma{aplicarSancion(agPknodo($pgo$, $pkNodo$),$j$)}{agPknodo(aplicarSancion($pgo$, $j$), $pkNodo$)}
+\tadAxioma{aplicarSancion(agJugador($pgo$, $j$),$j'$)}{
+\IF $j = j'$
+THEN
+agJugador($pgo$, sancionar($j$)) 
+ELSE 
+agJugador(aplicarSancion($pgo$, $j'$), $j$)
+FI
+}
+$ $\newline
 
 \tadAxioma{}{}
 
