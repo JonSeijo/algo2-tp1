@@ -30,12 +30,13 @@
 \tadOperacion{jugadoresEnRango}{pgo, pknodo}{conj(jugador)}{}
 \tadOperacion{pknodosCapturables}{pgo}{conj(pknodo)}{}
 \tadOperacion{elegirCapturador}{pgo}{pknodo}{}
+\tadOperacion{manejarCapturas}{pgo, jugador}{pgo}{}
 \tadOperacion{aplicarSancion}{pgo,jugador/j}{pgo}{} $\newline $
 
 \tadOperacion{actualizarPknodos}{pgo,jugador/j}{pgo}{}
 \tadOperacion{realizaCapturas}{pgo}{pgo}{}
 \tadOperacion{capturarPorNodo}{pgo,conj(pknodo)}{pgo}{}
-\tadOperacion{eliminaPokenodos}{pgo}{pgo}{}
+\tadOperacion{eliminarPokenodos}{pgo}{pgo}{}
 \tadOperacion{jugElegido}{pgo, pknodo}{jugador}{}
 
 
@@ -48,11 +49,17 @@
 $ $\newline
 \tadAxioma{moverJugador($pgo$, $j$, $npos$)}
 {\IF movimientoValido(mapa($pgo$), posicion($j$), $npos$)  THEN 
-manejarCapturas($pgo$, $j$, mover($j$, $npos$))
+manejarCapturas($pgo$, mover($j$, $npos$))
 ELSE 
 aplicarSancion($pgo$, $j$) 
 FI
 }
+
+% ManejarCapturas (pgo, nuevoJug)
+$ $\newline
+\tadAxioma{manejarCapturas($pgo$, $nJ$)}
+{eliminarPknodos(realizarCapturas(actualizarPknodos($pgo$, $nJ$)))}
+
 
 % AplicarSancion (pgo, jug)
 $ $\newline
@@ -66,7 +73,6 @@ ELSE
 agJugador(aplicarSancion($pgo$, $j'$), $j$)
 FI
 }
-$ $\newline
 
 % ActualizarPokenodos (pgo, jug)  = actualizarPknodos
 $ $\newline
