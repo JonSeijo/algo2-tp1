@@ -1,0 +1,40 @@
+
+\begin{tad}{\tadNombre{Mapa}}
+\tadGeneros{mapa}
+
+\tadIgualdadObservacionalSimple{}
+%\tadAlinearFunciones{crearJugador}{String/nombre,coord}{}{jugador}
+
+\tadObservadores
+%\tadOperacion{sanciones}{jugador}{nat}{}
+\tadOperacion{existeCoor}{mapa, coordenada}{bool}{}
+\tadOperacion{estanConectadas}{mapa/$m$, coordenada/$c1$, coordenada/$c2$}{bool}
+{existeCoor($m$, $c1$) $\land$ existeCoor($m$, $c2$)}
+
+\tadGeneradores
+\tadOperacion{crearMapa}{}{mapa}{}
+\tadOperacion{agCoord}{mapa/$m$, coordenada/$c$}{mapa}
+{$\neg$existeCoor($m$, $c$)}
+
+\tadOperacion{conectar}{mapa/$m$, coordenada/$c1$, coordenada/$c2$}{mapa}
+{existeCoor($m$, $c1$) $\land$ existeCoor($m$, $c2$) $\yluego$ $\neg$estanConectadas($m$, $c1$, $c2$)}
+
+
+
+\tadOtrasOperaciones
+%\tadOperacion{desconectar}{jugador/j}{jugador}{conectado(j)}
+
+%\tadAxiomas[\paratodo{jugador}{j}, \paratodo{String}{s}, \paratodo{coord}{c}, \paratodo{pokemon}{p}] 
+
+%\tadAlinearAxiomas{desconectar(capturar(j, p))~}
+
+
+
+
+
+
+
+
+
+
+\end{tad}
