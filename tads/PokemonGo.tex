@@ -8,21 +8,16 @@
 \tadObservadores
 \tadOperacion{mapa}{pgo}{mapa}{}
 \tadOperacion{jugadores}{pgo}{conj(jugador)}{}
-\tadOperacion{pokemones}{pgo}{}{}
+\tadOperacion{pokenodos}{pgo}{conj(pknodo)}{}
 
 \tadGeneradores
 
 \tadOperacion{crearPGO}{mapa}{pgo}{}
-\tadOperacion{agregarPokemon}{pgo, pokemon/p}{pgo}{$\neg$ pertenecePokemon(p)}
-\tadOperacion{agregarJugador}{pgo, jugador/j}{pgo}{$\neg$ perteneceJugador(j)}
+\tadOperacion{agPknodo}{pgo/$pg$, pknodo/$nodo$}{pgo}{$nodo \in$ pokenodos($pg$)}
+\tadOperacion{agJugador}{pgo/$pg$, jugador/$j$}{pgo}{$j \in$ jugadores($pg$)}
 
 \tadOtrasOperaciones
-\tadOperacion{pertenecePokemon}{pokemon}{bool}{}
-\tadOperacion{perteneceJugador}{jugador}{bool}{}
 
-
-
-\tadOperacion{sancionarJug}{pgo,jugador}{pgo}{}  %quiza no necesario, reemplazado por aplicarsancion%
 \tadOperacion{moverJugador}{pgo,jugador,coordenada}{pgo}{}
 \tadOperacion{conectarJug}{pgo, jugador}{pgo}{}
 \tadOperacion{desconectarJug}{pgo, jugador}{pgo}{} $\newline $
@@ -45,6 +40,7 @@
 
 %\tadAlinearAxiomas{}
 
+% Mover jugador (pgo, j, pos)
 %mover(j) es el generador de jugador
 $ $\newline
 \tadAxioma{moverJugador($pgo$, $j$, $npos$)}
