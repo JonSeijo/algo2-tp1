@@ -1,20 +1,20 @@
 
 \begin{tad}{\tadNombre{PokemonGo}}
-\tadGeneros{pkg}
+\tadGeneros{pgo}
 
 \tadIgualdadObservacionalSimple{$(true \igobs true) \land (false \igobs false) \land \neg(true \igobs false) \land \neg(false \igobs true)$}
 %\tadAlinearFunciones{pertenecePokemon}{kg, pokemon/p}{conj(jugador)}
 
 \tadObservadores
-\tadOperacion{mapa}{pkg}{mapa}{}
-\tadOperacion{jugadores}{pkg}{conj(jugador)}{}
-\tadOperacion{pokemones}{pkg}{}{}
+\tadOperacion{mapa}{pgo}{mapa}{}
+\tadOperacion{jugadores}{pgo}{conj(jugador)}{}
+\tadOperacion{pokemones}{pgo}{}{}
 
 \tadGeneradores
 
-\tadOperacion{crearPGO}{mapa}{pkg}{}
-\tadOperacion{agregarPokemon}{pkg, pokemon/p}{pkg}{$\neg$ pertenecePokemon(p)}
-\tadOperacion{agregarJugador}{pkg, jugador/j}{pkg}{$\neg$ perteneceJugador(j)}
+\tadOperacion{crearPGO}{mapa}{pgo}{}
+\tadOperacion{agregarPokemon}{pgo, pokemon/p}{pgo}{$\neg$ pertenecePokemon(p)}
+\tadOperacion{agregarJugador}{pgo, jugador/j}{pgo}{$\neg$ perteneceJugador(j)}
 
 \tadOtrasOperaciones
 \tadOperacion{pertenecePokemon}{pokemon}{bool}{}
@@ -53,7 +53,7 @@ aplicarSancion($pgo$, $j$)
 FI
 }
 
-% AplicarSancion
+% AplicarSancion (pgo, jug)
 $ $\newline
 \tadAxioma{aplicarSancion(crearPGO($mapa$),$j$)}{crearPGO($mapa$)}
 \tadAxioma{aplicarSancion(agPknodo($pgo$, $pkNodo$),$j$)}{agPknodo(aplicarSancion($pgo$, $j$), $pkNodo$)}
@@ -67,7 +67,8 @@ FI
 }
 $ $\newline
 
-\tadAxioma{}{}
+% ActualizarPokenodos (pgo, jug)  = actPkNodos
+\tadAxioma{actPkNodos()}{}
 
 \tadAxioma{}{}
 \tadAxioma{}{}
