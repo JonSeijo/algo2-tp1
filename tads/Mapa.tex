@@ -22,7 +22,24 @@
 
 
 \tadOtrasOperaciones
-%\tadOperacion{desconectar}{jugador/j}{jugador}{conectado(j)}
+
+\tadOperacion{coordenadas}{mapa/$m$}{conj(coordenada)}{}
+
+\tadOperacion{hayCamino}{mapa/$m$, coordenada/$c1$, coordenada/$c2$}{bool}
+{existeCoor($m$, $c1$) $\land$ existeCoor($m$, $c2$)}
+
+$ $\newline
+\tadOperacion{buscarCamino}{mapa/$m$, conj(coordenada)/$aRevisar$, coordenada/$c2$, conj(coordenada)/$recorridas$}{bool}
+{($aRevisar$ $\subseteq$ coordenadas($m$)) $\land$ ($recorridas$ $\subseteq$ coordenadas($m$))
+$\land$ ($aRevisar \cap recorridas = \emptyset$) $\land$ ($c2 \in$ coordenadas($m$))}
+
+$ $\newline
+\tadOperacion{proximasARevisar}{conj(coordenada)/$aRevisar$, conj(coordenada)/$recorridas$}{conj(coordenada)}{$aRevisar$ $\neq$ $\emptyset$}
+
+$ $\newline
+\tadOperacion{dameConexiones}{mapa/$m$, coordenada/$c$}{conj(coordenada)}
+{existeCoor($m$, $c$)}
+
 
 %\tadAxiomas[\paratodo{jugador}{j}, \paratodo{String}{s}, \paratodo{coord}{c}, \paratodo{pokemon}{p}] 
 
