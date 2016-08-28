@@ -20,6 +20,25 @@
 \tadOperacion{pertenecePokemon}{pokemon}{bool}{}
 \tadOperacion{perteneceJugador}{jugador}{bool}{}
 
+
+
+\tadOperacion{sancionarJug}{pgo,jugador}{pgo}{}  %quiza no necesario, reemplazado por aplicarsancion%
+\tadOperacion{moverJug}{pgo,jugador,coordenada}{pgo}{}
+\tadOperacion{conectarJug}{pgo, jugador}{pgo}{}
+\tadOperacion{desconectarJug}{pgo, jugador}{pgo}{} $\newline $
+
+\tadOperacion{jugadoresEnRango}{pgo, pknodo}{conj(jugador)}{}
+\tadOperacion{pokenodosCapturables}{pgo}{conj(pknodo)}{}
+\tadOperacion{elegirCapturador}{pgo}{pknodo}{}
+\tadOperacion{aplicarSancion}{pgo,jugador/j}{pgo}{} $\newline $
+
+\tadOperacion{actualizarPokenodos}{pgo,jugador/j}{pgo}{}
+\tadOperacion{realizaCapturas}{pgo}{pgo}{}
+\tadOperacion{capturarPorNodo}{pgo,conj(pknodo)}{pgo}{}
+\tadOperacion{eliminaPokenodos}{pgo}{pgo}{}
+
+
+
 \tadAxiomas[\paratodo{pkg}{pg}]
 
 \tadAlinearAxiomas{}
