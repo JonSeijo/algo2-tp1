@@ -31,44 +31,44 @@
 \tadAlinearAxiomas{desconectar(capturar(j, p))~}
 
 $ $\newline
-\tadAxioma{sanciones(crear(s, c))}{0}
-\tadAxioma{sanciones(conectar(j, c))}{sanciones(j)}
-\tadAxioma{sanciones(mover(j, c))}{sanciones(j)}
-\tadAxioma{sanciones(capturar(j, p))}{sanciones(j)}
-\tadAxioma{sanciones(sancionar(j))}{1 + sanciones(j)}
+\tadAxioma{sanciones(crear($s$, $c$))}{0}
+\tadAxioma{sanciones(conectar($j$, $c$))}{sanciones($j$)}
+\tadAxioma{sanciones(mover($j$, $c$))}{sanciones($j$)}
+\tadAxioma{sanciones(capturar($j$, $p$))}{sanciones($j$)}
+\tadAxioma{sanciones(sancionar($j$))}{1 + sanciones($j$)}
 
 $ $\newline
-\tadAxioma{conectado(crear(s, c))}{false}
-\tadAxioma{conectado(sancionar(j))}{conectado(j)}
-\tadAxioma{conectado(mover(j, c))}{conectado(j)}
-\tadAxioma{conectado(capturar(j, p))}{conectado(j)}
-\tadAxioma{conectado(conectar(j, c))}{true}
+\tadAxioma{conectado(crear($s$, $c$))}{false}
+\tadAxioma{conectado(sancionar($j$))}{conectado($j$)}
+\tadAxioma{conectado(mover($j$, $c$))}{conectado($j$)}
+\tadAxioma{conectado(capturar($j$, $p$))}{conectado($j$)}
+\tadAxioma{conectado(conectar($j$, $c$))}{true}
 
 $ $\newline
-\tadAxioma{posicion(crear(s, c))}{c}
-\tadAxioma{posicion(sancionar(j))}{posicion(j)}
-\tadAxioma{posicion(mover(j, c))}{c}
-\tadAxioma{posicion(capturar(j, p))}{posicion(j)}
-\tadAxioma{posicion(conectar(j, c))}{c}
+\tadAxioma{posicion(crear($s$, $c$))}{$c$}
+\tadAxioma{posicion(sancionar($j$))}{posicion($j$)}
+\tadAxioma{posicion(mover($j$, $c$))}{$c$}
+\tadAxioma{posicion(capturar($j$, $p$))}{posicion($j$)}
+\tadAxioma{posicion(conectar($j$, $c$))}{$c$}
 
 $ $\newline
-\tadAxioma{desconectar(crear(s, c))}{crear(s, c)}
-\tadAxioma{desconectar(sancionar(j))}{sancoinar(desconectar(j))}
-\tadAxioma{desconectar(mover(j, c))}{mover(desconectar(j), c)}
-\tadAxioma{desconectar(capturar(j, p))}{capturar(desconectar(j), p)}
-\tadAxioma{desconectar(conectar(j, c))}{desconectar(j)}
+\tadAxioma{desconectar(crear($s$, $c$))}{crear($s$, $c$)}
+\tadAxioma{desconectar(sancionar($j$))}{sancoinar(desconectar($j$))}
+\tadAxioma{desconectar(mover($j$, $c$))}{mover(desconectar($j$), $c$)}
+\tadAxioma{desconectar(capturar($j$, $p$))}{capturar(desconectar($j$), $p$)}
+\tadAxioma{desconectar(conectar($j$, $c$))}{desconectar($j$)}
 
 $ $\newline
-\tadAxioma{nombre(crear(s, c))}{s}
-\tadAxioma{nombre(conectar(j, c))}{nombre(j)}
-\tadAxioma{nombre(mover(j, c))}{nombre(j)}
-\tadAxioma{nombre(capturar(j, p))}{nombre(j)}
-\tadAxioma{nombre(sancionar(j))}{nombre(j)}
+\tadAxioma{nombre(crear($s$, $c$))}{$s$}
+\tadAxioma{nombre(conectar($j$, $c$))}{nombre($j$)}
+\tadAxioma{nombre(mover($j$, $c$))}{nombre($j$)}
+\tadAxioma{nombre(capturar($j$, $p$))}{nombre($j$)}
+\tadAxioma{nombre(sancionar($j$))}{nombre($j$)}
 
 $ $\newline
-\tadAxioma{capturados(crear(s, c))}{\secuencia{}}
-\tadAxioma{capturados(conectar(j, c))}{\secuencia{} \circulito  capturados(j)}
-\tadAxioma{capturados(mover(j, c))}{\secuencia{} \circulito capturados(j)}
-\tadAxioma{capturados(capturar(j, p))}{p \circulito capturados(j)}
-\tadAxioma{capturados(sancionar(j))}{\secuencia{} \circulito capturados(j)}
+\tadAxioma{capturados(crear($s$, $c$))}{\secuencia{}}
+\tadAxioma{capturados(conectar($j$, $c$))}{\secuencia{} \circulito  capturados($j$)}
+\tadAxioma{capturados(mover($j$, $c$))}{\secuencia{} \circulito capturados($j$)}
+\tadAxioma{capturados(capturar($j$, $p$))}{$p$ \circulito capturados($j$)}
+\tadAxioma{capturados(sancionar($j$))}{\secuencia{} \circulito capturados($j$)}
 \end{tad}
