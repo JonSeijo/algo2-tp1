@@ -28,7 +28,7 @@
 \tadOperacion{desconectarJug}{pgo, jugador}{pgo}{} $\newline $
 
 \tadOperacion{jugadoresEnRango}{pgo, pknodo}{conj(jugador)}{}
-\tadOperacion{pokenodosCapturables}{pgo}{conj(pknodo)}{}
+\tadOperacion{pknodosCapturables}{pgo}{conj(pknodo)}{}
 \tadOperacion{elegirCapturador}{pgo}{pknodo}{}
 \tadOperacion{aplicarSancion}{pgo,jugador/j}{pgo}{} $\newline $
 
@@ -69,18 +69,30 @@ $ $\newline
 
 % ActualizarPokenodos (pgo, jug)  = actualizarPknodos
 $ $\newline
-\tadAxioma{actualizarPknodos(crearPGO($mapa$), $nJ$)}{crearPGO($mapa$)}
-\tadAxioma{actualizarPknodos(agJugador($pgo$, $j$), $nJ$)}{agJugador(actualizarPknodos($pgo$, $nJ$), $j$)}
+\tadAxioma{actualizarPknodos(crearPGO($mapa$), $nJ$)}{crearPGO($mapa$)}  %ver espaciado raro por aca
+\tadAxioma{actualizarPknodos(agJugador($pgo$, $j$), $nJ$)}{agJugador(actualizarPknodos($pgo$,$nJ$), $j$)}
 \tadAxioma{actualizarPknodos(agPknodo($pgo$, $pknodo$), $nJ$)}{
 \IF enRango2($pknodo$, $nJ$)
 THEN
-agPknodo(actualizarPknodos($pgo$, $nJ$), reiniciar($pknodo$))
+agPknodo(actualizarPknodos($pgo$,$nJ$), reiniciar($pknodo$))
 ELSE 
-agPknodo(actualizarPknodos($pgo$, $nJ$), sumarUno($pknodo$))
+agPknodo(actualizarPknodos($pgo$,$nJ$), sumarUno($pknodo$))
 FI
 }
 
 
+% PknodosCapturables (pgo)
+$ $\newline
+\tadAxioma{pknodosCapturables(crearPGO($mapa$))}{$\emptyset$}
+\tadAxioma{pknodosCapturables(agJugador($pgo$, $j$))}{pknodosCapturables($pgo$)}
+\tadAxioma{pknodosCapturables(agPknodo($pgo$, $pknodo$))}{
+\IF contador($pknodo$) = 10
+THEN
+Ag($pknodo$, pknodosCapturables($pgo$))
+ELSE 
+pknodosCapturables($pgo$)
+FI
+}
 
 \tadAxioma{}{}
 \tadAxioma{}{}
