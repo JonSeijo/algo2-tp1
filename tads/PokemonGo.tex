@@ -135,14 +135,18 @@ ELSE
 capturarPorNodo(capturar($pgo$, jugElegido($pgo$,dameUno($pknodos$)), pokemon(dameUno($pknodos$))), sinUno($pknodos$))
 FI}
 
-\tadAxioma{•}
-{•}
-
-\tadAxioma{•}
-{•}
-
-\tadAxioma{•}
-{•}
+% EliminarNodos (pgo)
+$ $\newline
+\tadAxioma{eliminarNodos(crearPGO($mapa$))}{crear($mapa$)}
+\tadAxioma{eliminarNodos(agJugador($pgo$, $j$))}{agJugador(eliminarNodos($pgo$), $j$)}
+\tadAxioma{eliminarNodos(agPknodo($pgo$, $pknodo$))}{
+\IF contador($pknodo$) $\geq 10$
+THEN
+eliminarNodos($pgo$)
+ELSE 
+agNodo(eliminarNodos($pgo$), $pnodo$)
+FI
+}
 
 
 
