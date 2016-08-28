@@ -32,7 +32,7 @@
 \tadOperacion{elegirCapturador}{pgo}{pknodo}{}
 \tadOperacion{aplicarSancion}{pgo,jugador/j}{pgo}{} $\newline $
 
-\tadOperacion{actualizarPokenodos}{pgo,jugador/j}{pgo}{}
+\tadOperacion{actualizarPknodos}{pgo,jugador/j}{pgo}{}
 \tadOperacion{realizaCapturas}{pgo}{pgo}{}
 \tadOperacion{capturarPorNodo}{pgo,conj(pknodo)}{pgo}{}
 \tadOperacion{eliminaPokenodos}{pgo}{pgo}{}
@@ -67,10 +67,21 @@ FI
 }
 $ $\newline
 
-% ActualizarPokenodos (pgo, jug)  = actPkNodos
-\tadAxioma{actPkNodos()}{}
+% ActualizarPokenodos (pgo, jug)  = actualizarPknodos
+$ $\newline
+\tadAxioma{actualizarPknodos(crearPGO($mapa$), $nJ$)}{crearPGO($mapa$)}
+\tadAxioma{actualizarPknodos(agJugador($pgo$, $j$), $nJ$)}{agJugador(actualizarPknodos($pgo$, $nJ$), $j$)}
+\tadAxioma{actualizarPknodos(agPknodo($pgo$, $pknodo$), $nJ$)}{
+\IF enRango2($pknodo$, $nJ$)
+THEN
+agPknodo(actualizarPknodos($pgo$, $nJ$), reiniciar($pknodo$))
+ELSE 
+agPknodo(actualizarPknodos($pgo$, $nJ$), sumarUno($pknodo$))
+FI
+}
 
-\tadAxioma{}{}
+
+
 \tadAxioma{}{}
 \tadAxioma{}{}
 
