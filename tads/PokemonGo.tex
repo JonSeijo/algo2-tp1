@@ -35,10 +35,33 @@
 \tadOperacion{jugElegido}{pgo, pknodo}{jugador}{}
 
 
-
-\tadAxiomas[\paratodo{pkg}{pg}]
+% PARA HACER:
+% Hay que diferenciar el nombre del tipo pgo con el nombre de variable pgo
+% variable -> pgo     tipo -> pGO   (la idea es que la variable sea mas facil de escribir)
+\tadAxiomas[\paratodo{pGo}{pgo}]
 
 %\tadAlinearAxiomas{}
+
+% Mapa (pgo)
+$ $\newline
+\tadAxioma{mapa(crearPGO($map$))}{$map$}
+\tadAxioma{mapa(agJugador($pgo$, $j$))}{mapa($pgo$)}
+\tadAxioma{mapa(agPknodo($pgo$, $pknodo$))}{mapa($pgo$)}
+
+% Jugadores (pgo)
+$ $\newline
+\tadAxioma{jugadores(crearPGO($mapa$))}{$\emptyset$}
+\tadAxioma{jugadores(agJugador($pgo$, $j$))}{Ag($j$, jugadores($pgo$))}
+\tadAxioma{jugadores(agPknodo($pgo$, $pknodo$))}{jugadores($pgo$)}
+
+
+% Pokenodos (pgo)
+$ $\newline
+\tadAxioma{pokenodos(crearPGO($mapa$))}{$\emptyset$}
+\tadAxioma{pokenodos(agJugador($pgo$, $j$))}{pokenodos($pgo$)}
+\tadAxioma{pokenodos(agPknodo($pgo$, $pknodo$))}{Ag($pknodo$, pokenodos($pgo$))}
+
+
 
 % Mover jugador (pgo, j, pos)
 %mover(j) es el generador de jugador
