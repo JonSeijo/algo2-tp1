@@ -22,6 +22,9 @@
 \tadOperacion{conectarJug}{pgo, jugador}{pgo}{}
 \tadOperacion{desconectarJug}{pgo, jugador}{pgo}{} $\newline $
 
+\tadOperacion{movimientoValido}{map, coordenada, coordenada}{bool}{}
+\tadOperacion{distanciaMenorA}{nat, coordenada, coordenada}{bool}{}
+
 \tadOperacion{jugadoresEnRango}{pgo, pknodo}{conj(jugador)}{}
 \tadOperacion{pknodosCapturables}{pgo}{conj(pknodo)}{}
 \tadOperacion{elegirCapturador}{pgo}{pknodo}{}
@@ -73,6 +76,19 @@ ELSE
 aplicarSancion($pgo$, $j$) 
 FI
 }
+
+% MovimientoValido(mapa, pos1, pos2)
+$ $\newline
+\tadAxioma{movimientoValido($map$, $pos1$, $pos2$)}
+{distanciaMenorA10($pos1$, $pos2$) $\land$ existeCoor($map$, $pos1$) $\land$ existeCoor($map$, $pos2$)
+$\yluego$ hayCamino($map$, $pos1$, $pos2$)}
+
+
+% DistanciaMenorA
+$ $\newline
+\tadAxioma{distanciaMenorA($n$, $c1$, $c2$)}
+{($\Pi_2(c1) - \Pi_1(c1)) * (\Pi_2(c1) - \Pi_1(c1)$)  $+$ $ $\newline
+($\Pi_2(c2) - \Pi_1(c2)) * (\Pi_2(c2) - \Pi_1(c2)$)  $\leq$ $n * n$}
 
 % ManejarCapturas (pgo, nuevoJug)
 $ $\newline
