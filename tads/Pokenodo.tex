@@ -23,8 +23,24 @@
 \tadOtrasOperaciones
 
 \tadOperacion{reiniciar}{Pknodo}{Pknodo}{}
-%\tadAxiomas[\paratodo{jugador}{j}, \paratodo{String}{s}, \paratodo{coord}{c}, \paratodo{pokemon}{p}] 
+\tadAxiomas[\paratodo{Pknodo}{pn},  \paratodo{pokemon}{pk}] 
 
-%\tadAlinearAxiomas{desconectar(capturar(j, p))~}
+\tadAlinearAxiomas{posicion(crearPknodo($pk$))~}
+
+
+$ $\newline
+\tadAxioma{posicion(crearPknodo($pk$))}{posicion($pk$)}
+\tadAxioma{posicion(sumarUno($pn$))}{posicion($pn$)}
+
+
+$ $\newline
+\tadAxioma{contador(crearPknodo($pk$))}{0}
+\tadAxioma{contador(sumarUno($pn$))}{ 1 + contador($pn$)}
+
+
+$ $\newline
+\tadAxioma{reiniciar(crearPknodo($pk$))}{crearPknodo($pk$)}
+\tadAxioma{reiniciar(sumarUno($pn$))}{reiniciar($pn$)}
+
 
 \end{tad}
