@@ -125,9 +125,15 @@ $ $\newline
 \tadAxioma{realizarCapturas($pgo$)}{capturasPorNodo($pgo$, nodosCapturables($pgo$))}
 
 
-
-\tadAxioma{•}
-{•}
+% CapturasPorNodo (pgo, pknodosRestantes)
+$ $\newline
+\tadAxioma{capturarPorNodo($pgo$, $pknodos$)}{
+\IF $pknodos = \emptyset$
+THEN
+$pgo$
+ELSE 
+capturarPorNodo(capturar($pgo$, jugElegido($pgo$,dameUno($pknodos$)), pokemon(dameUno($pknodos$))), sinUno($pknodos$))
+FI}
 
 \tadAxioma{•}
 {•}
