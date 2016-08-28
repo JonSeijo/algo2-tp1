@@ -1,0 +1,30 @@
+
+\begin{tad}{\tadNombre{PokeNodo}}
+\tadGeneros{Pknodo}
+
+\tadIgualdadObservacionalSimple{}
+\tadAlinearFunciones{damePokemon}{Pknodo}{}{}
+
+\tadObservadores
+%\tadOperacion{sanciones}{jugador}{nat}{}
+\tadOperacion{damePokemon}{Pknodo}{pokemon}{}
+
+% CREO que posicion no es necesario, porque podemos sacarla del pokemon
+% podria ir en 'otras operaciones'
+\tadOperacion{posicion}{Pknodo}{coordenada}{}
+
+\tadOperacion{contador}{Pknodo}{nat}{}
+
+
+\tadGeneradores
+\tadOperacion{crearPknodo}{pokemon}{Pknodo}{}
+\tadOperacion{sumarUno}{Pknodo}{Pknodo}{}
+
+\tadOtrasOperaciones
+
+\tadOperacion{reiniciar}{Pknodo}{Pknodo}{}
+%\tadAxiomas[\paratodo{jugador}{j}, \paratodo{String}{s}, \paratodo{coord}{c}, \paratodo{pokemon}{p}] 
+
+%\tadAlinearAxiomas{desconectar(capturar(j, p))~}
+
+\end{tad}
