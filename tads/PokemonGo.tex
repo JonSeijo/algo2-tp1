@@ -36,6 +36,7 @@
 \tadOperacion{realizaCapturas}{pgo}{pgo}{}
 \tadOperacion{capturarPorNodo}{pgo,conj(pknodo)}{pgo}{}
 \tadOperacion{eliminaPokenodos}{pgo}{pgo}{}
+\tadOperacion{jugElegido}{pgo, pknodo}{jugador}{}
 
 
 
@@ -106,5 +107,29 @@ Ag($j$, jugadoresEnRango($pgo$, $pknodo$))
 ELSE 
 jugadoresEnRango($pgo$, $pknodo$)
 FI}
+
+
+% JugElegido (pgo, pknodo)
+$ $\newline
+\tadAxioma{jugElegido($pgo$, $pknodo$)}{dameUno(jugadoresEnRango($pgo$, $pknodo$))}
+
+
+
+\tadAxioma{•}
+{•}
+
+\tadAxioma{•}
+{•}
+
+\tadAxioma{•}
+{•}
+
+\tadAxioma{•}
+{•}
+
+\tadAxioma{•}
+{•}
+
+
 
 \end{tad}
