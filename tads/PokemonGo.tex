@@ -72,7 +72,7 @@ $ $\newline
 \tadAxioma{actualizarPknodos(crearPGO($mapa$), $nJ$)}{crearPGO($mapa$)}  %ver espaciado raro por aca
 \tadAxioma{actualizarPknodos(agJugador($pgo$, $j$), $nJ$)}{agJugador(actualizarPknodos($pgo$,$nJ$), $j$)}
 \tadAxioma{actualizarPknodos(agPknodo($pgo$, $pknodo$), $nJ$)}{
-\IF enRango2($pknodo$, $nJ$)
+\IF enRango2($pknodo$, posicion($nJ$))
 THEN
 agPknodo(actualizarPknodos($pgo$,$nJ$), reiniciar($pknodo$))
 ELSE 
@@ -94,7 +94,17 @@ pknodosCapturables($pgo$)
 FI
 }
 
-\tadAxioma{}{}
-\tadAxioma{}{}
+
+% JugadoresEnRango (pgo, pknodo)
+$ $\newline
+\tadAxioma{jugadoresEnRango(crearPGO($mapa$), $pknodo$)}{$\emptyset$}
+\tadAxioma{jugadoresEnRango(agPknodo($pgo$, $pknodo$), $pknodo'$)}{jugadoresEnRango($pgo$, $pknodo'$)}
+\tadAxioma{jugadoresEnRango(agJugador($pgo$, $j$), $pknodo$)}{
+\IF conectado($j$) AND  enRango2($pknodo$, $j$)
+THEN
+Ag($j$, jugadoresEnRango($pgo$, $pknodo$))
+ELSE 
+jugadoresEnRango($pgo$, $pknodo$)
+FI}
 
 \end{tad}
