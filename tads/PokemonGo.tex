@@ -116,7 +116,7 @@ $ $\newline
 \tadAxioma{aplicarSancion(agJugador($pgo$, $j$),$j'$)}{
 \IF $j = j'$
 THEN
-agJugador($pgo$, sancionar($j$)) 
+{\IF $sanciones(j) \geq 4$ THEN $pgo$ ELSE agJugador($pgo$, sancionar($j$)) FI}
 ELSE 
 agJugador(aplicarSancion($pgo$, $j'$), $j$)
 FI
