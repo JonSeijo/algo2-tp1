@@ -50,6 +50,8 @@
 \tadOperacion{jugElegido}{pgo, pknodo}{jugador}{}
 
 
+\tadOperacion{cuentaTotalPokemones}{pgo}{Nat}{}
+
 
 % PARA HACER:
 % Hay que diferenciar el nombre del tipo pgo con el nombre de variable pgo
@@ -196,6 +198,9 @@ agNodo(eliminarNodos($pgo$), $pnodo$)
 FI
 }
 
-
+$ $\newline
+\tadAxioma{cuentaTotalPokemones(crearPGO($mapa$))}{0}
+\tadAxioma{cuentaTotalPokemones(agJugador($pgo$, $j$))}{long(capturados($j$)) + cuentaTotalPokemones($pgo$)}
+\tadAxioma{cuentaTotalPokemones(agPknodo($pgo$, $pknodo$))}{1 + cuentaTotalPokemones($pgo$)}
 
 \end{tad}
