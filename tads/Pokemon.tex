@@ -1,0 +1,33 @@
+
+\begin{tad}{\tadNombre{Pokemon}}
+\tadGeneros{pokemon}
+
+\tadIgualdadObservacionalSimple{}
+\tadAlinearFunciones{crearPokemon}{String/nombre,coord}{coordenada}
+
+\tadObservadores
+\tadOperacion{posicion}{pokemon}{coordenada}{}
+\tadOperacion{tipo}{pokemon}{String}{}
+
+
+\tadGeneradores
+
+\tadOperacion{crearPokemon}{String/nombre,coord}{pokemon}{}
+
+
+
+\tadOtrasOperaciones
+%\tadOperacion{}{}{}{}
+
+\tadAxiomas[ \paratodo{String}{s}, \paratodo{coord}{c}, \paratodo{pokemon}{p}] 
+
+\tadAlinearAxiomas{posicion(crearPokemon($s$, $c$))~}
+
+$ $\newline
+\tadAxioma{posicion(crearPokemon($s$, $c$))}{c}
+
+$ $\newline
+\tadAxioma{tipo(crearPokemon($s$, $c$))}{s}
+
+
+\end{tad}
