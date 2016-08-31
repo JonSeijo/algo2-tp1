@@ -41,14 +41,25 @@ $ $\newline
 {existeCoor($m$, $c$)}
 
 
-\tadAxiomas[\paratodo{coordenada}{c, c'}, \paratodo{mapa}{m}] 
+\tadAxiomas[\paratodo{coordenada}{c, c1, c2}, \paratodo{mapa}{m}] 
 
-\tadAlinearAxiomas{coordenadas(conectar(m, c, c'))~}
+\tadAlinearAxiomas{estanConectadas(conectar(m, c1, c2), c1', c2')~}
 
 $ $ \newline 
 \tadAxioma{coordenadas(crearMapa())}{$\emptyset$}
 \tadAxioma{coordenadas(agCoord(m, c))}{Ag(c, cooerdenadas(m))}
 \tadAxioma{coordenadas(conectar(m, c, c'))}{cooerdenadas(m)}
+
+$ $ \newline 
+\tadAxioma{existeCoor(crearMapa(), c1)}{false}
+\tadAxioma{existeCoor(agCoord(m, c1), c1')}{\IF c1 == c1' THEN true ELSE existeCoor(m) FI}
+\tadAxioma{existeCoor(conectar(m, c1, c2), c1')}{\IF c1 == c1' $\lor$ c2 == c1' THEN true ELSE existeCoor(m) FI}
+
+
+$ $ \newline 
+\tadAxioma{estanConectadas(crearMapa(), c1', c2')}{false}
+\tadAxioma{estanConectadas(agCoord(m, c1),  c1', c2')}{\IF c1 == c1' $\lor$ c1 == c2'  THEN false ELSE existeCoor(m) FI}
+\tadAxioma{estanConectadas(conectar(m, c1, c2), c1', c2')}{\IF c1 == c1' $\land$ c2 == c2' THEN true ELSE existeCoor(m) FI}
 
 
 
