@@ -1,8 +1,10 @@
 
 \begin{tad}{\tadNombre{PokemonGo}}
-\tadGeneros{pgo}
+\tadGeneros{pGo}
 
-\tadIgualdadObservacionalSimple{$(true \igobs true) \land (false \igobs false) \land \neg(true \igobs false) \land \neg(false \igobs true)$}
+\tadIgualdadObservacional{pgo}{pgo'}{pGo}{$(mapa(pgo) \igobs mapa(pgo')) \land $\newline
+$(jugadores(pgo) \igobs jugadores(pgo')) \land$\newline
+$(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 %\tadAlinearFunciones{pertenecePokemon}{kg, pokemon/p}{conj(jugador)}
 
 \tadObservadores

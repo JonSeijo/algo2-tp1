@@ -2,7 +2,12 @@
 \begin{tad}{\tadNombre{Jugador}}
 \tadGeneros{jugador}
 
-\tadIgualdadObservacionalSimple{}
+\tadIgualdadObservacional{j}{j'}{Jugador}{$(nombre(j) \igobs nombre(j')) \land $\newline
+$(posicion(j) \igobs posicion(j')) \land $\newline
+$(capturados(j) \igobs capturados(j')) \land $\newline
+$(sanciones(j) \igobs sanciones(j')) \land $\newline
+$(conectado(j) \igobs conectado(j')) \land $\newline}
+
 \tadAlinearFunciones{crearJugador}{String/nombre,coord}{}{jugador}
 
 \tadObservadores
