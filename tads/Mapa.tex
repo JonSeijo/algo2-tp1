@@ -61,12 +61,10 @@ $ $ \newline
 \tadAxioma{estanConectadas(agCoord(m, c1),  c1', c2')}{\IF c1 == c1' $\lor$ c1 == c2'  THEN false ELSE existeCoor(m) FI}
 \tadAxioma{estanConectadas(conectar(m, c1, c2), c1', c2')}{\IF c1 == c1' $\land$ c2 == c2' THEN true ELSE existeCoor(m) FI}
 
-
-
-
-
-
-
+$ $ \newline 
+\tadAxioma{dameConexiones(crearMapa(), c1)}{$\emptyset$}
+\tadAxioma{dameConexiones(agCoord(m, c), c1)}{dameConexiones(m)}
+\tadAxioma{dameConexiones(conectar(m, c, c'), c1)}{\IF c == c1 THEN Ag(c', dameConexiones(m)) ELSE { \IF  c' == c1  THEN Ag(c, dameConexiones(m)) ELSE dameConexiones(m) FI } FI}
 
 
 \end{tad}
