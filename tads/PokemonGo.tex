@@ -200,7 +200,7 @@ FI
 
 $ $\newline
 \tadAxioma{cuentaTotalPokemones(crearPGO($mapa$))}{0}
-\tadAxioma{cuentaTotalPokemones(agJugador($pgo$, $j$))}{long(capturados($j$)) + cuentaTotalPokemones($pgo$)}
+\tadAxioma{cuentaTotalPokemones(agJugador($pgo$, $j$))}{\IF sanciones(j) $\leq$ 4 THEN long(capturados($j$)) + cuentaTotalPokemones($pgo$) ELSE 0 + cuentaTotalPokemones($pgo$) FI}
 \tadAxioma{cuentaTotalPokemones(agPknodo($pgo$, $pknodo$))}{1 + cuentaTotalPokemones($pgo$)}
 
 \end{tad}

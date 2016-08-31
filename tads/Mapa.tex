@@ -41,10 +41,14 @@ $ $\newline
 {existeCoor($m$, $c$)}
 
 
-%\tadAxiomas[\paratodo{jugador}{j}, \paratodo{String}{s}, \paratodo{coord}{c}, \paratodo{pokemon}{p}] 
+\tadAxiomas[\paratodo{coordenada}{c, c'}, \paratodo{mapa}{m}] 
 
-%\tadAlinearAxiomas{desconectar(capturar(j, p))~}
+\tadAlinearAxiomas{coordenadas(conectar(m, c, c'))~}
 
+$ $ \newline 
+\tadAxioma{coordenadas(crearMapa())}{$\emptyset$}
+\tadAxioma{coordenadas(agCoord(m, c))}{Ag(c, cooerdenadas(m))}
+\tadAxioma{coordenadas(conectar(m, c, c'))}{cooerdenadas(m)}
 
 
 

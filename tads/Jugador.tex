@@ -66,9 +66,9 @@ $ $\newline
 \tadAxioma{nombre(sancionar($j$))}{nombre($j$)}
 
 $ $\newline
-\tadAxioma{capturados(crearJugador($s$, $c$))}{\secuencia{}}
-\tadAxioma{capturados(conectar($j$, $c$))}{\secuencia{} \circulito  capturados($j$)}
-\tadAxioma{capturados(mover($j$, $c$))}{\secuencia{} \circulito capturados($j$)}
+\tadAxioma{capturados(crearJugador($s$, $c$))}{\secuvacia}
+\tadAxioma{capturados(conectar($j$, $c$))}{capturados($j$)}
+\tadAxioma{capturados(mover($j$, $c$))}{capturados($j$)}
 \tadAxioma{capturados(capturar($j$, $p$))}{$p$ \circulito capturados($j$)}
-\tadAxioma{capturados(sancionar($j$))}{\secuencia{} \circulito capturados($j$)}
+\tadAxioma{capturados(sancionar($j$))}{capturados($j$)}
 \end{tad}
