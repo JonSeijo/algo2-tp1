@@ -5,7 +5,7 @@
 \tadIgualdadObservacional{pkn}{pkn'}{Pknodo}{$ (damePokemon(pkn)\igobs damePokemon(pkn')) \yluego$\\
 ($posicion(pkn)\igobs posicion(pkn'))  \yluego\ (contador(pkn)\igobs\ contador(pkn')) $}
 
-\tadAlinearFunciones{damePokemon}{Pknodo}{}{}
+\tadAlinearFunciones{damePokemon}{pokemon, coordenada}{}{}
 
 \tadObservadores
 %\tadOperacion{sanciones}{jugador}{nat}{}
@@ -19,30 +19,33 @@
 
 
 \tadGeneradores
-\tadOperacion{crearPknodo}{pokemon}{Pknodo}{}
+\tadOperacion{crearPknodo}{pokemon, coordenada}{Pknodo}{}
 \tadOperacion{sumarUno}{Pknodo}{Pknodo}{}
 
 \tadOtrasOperaciones
 
 \tadOperacion{reiniciar}{Pknodo}{Pknodo}{}
-\tadAxiomas[\paratodo{Pknodo}{pn},  \paratodo{pokemon}{pk}] 
+\tadAxiomas[\paratodo{Pknodo}{pn},  \paratodo{pokemon}{pk}, \paratodo{coordenada}{c}] 
 
-\tadAlinearAxiomas{posicion(crearPknodo($pk$))~}
+\tadAlinearAxiomas{damePokemon(crearPknodo($pk$, c))~}
 
 
 $ $\newline
-\tadAxioma{posicion(crearPknodo($pk$))}{posicion($pk$)}
+\tadAxioma{posicion(crearPknodo($pk$, c))}{c}
 \tadAxioma{posicion(sumarUno($pn$))}{posicion($pn$)}
 
 
 $ $\newline
-\tadAxioma{contador(crearPknodo($pk$))}{0}
+\tadAxioma{contador(crearPknodo($pk$, c))}{0}
 \tadAxioma{contador(sumarUno($pn$))}{ 1 + contador($pn$)}
 
 
 $ $\newline
-\tadAxioma{reiniciar(crearPknodo($pk$))}{crearPknodo($pk$)}
+\tadAxioma{reiniciar(crearPknodo($pk$, c))}{crearPknodo($pk$)}
 \tadAxioma{reiniciar(sumarUno($pn$))}{reiniciar($pn$)}
 
+$ $\newline
+\tadAxioma{damePokemon(crearPknodo($pk$, c))}{$pk$}
+\tadAxioma{damePokemon(sumarUno($pn$))}{damePokemon($pn$)}
 
 \end{tad}

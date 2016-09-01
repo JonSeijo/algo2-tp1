@@ -8,7 +8,7 @@ $(capturados(j) \igobs capturados(j')) \land $\newline
 $(sanciones(j) \igobs sanciones(j')) \land $\newline
 $(conectado(j) \igobs conectado(j')) \land $\newline}
 
-\tadAlinearFunciones{crearJugador}{String/nombre,coord}{}{jugador}
+\tadAlinearFunciones{crearJugador}{String/nombre,coordenada}{}{jugador}
 
 \tadObservadores
 \tadOperacion{sanciones}{jugador}{nat}{}
@@ -23,7 +23,7 @@ $(conectado(j) \igobs conectado(j')) \land $\newline}
 \tadOperacion{crearJugador}{String/nombre,coordenada}{jugador}{}
 \tadOperacion{sancionar}{jugador}{jugador}{conectado(j)}
 \tadOperacion{conectar}{jugador/j, coordenada}{jugador}{$\neg$ conectado(j)}
-\tadOperacion{mover}{jugador,coord}{jugador}{conectado()j}
+\tadOperacion{mover}{jugador,coordenada}{jugador}{conectado()j}
 \tadOperacion{capturar}{jugador, pokemon}{jugador}{conectado(j)}
 
 
