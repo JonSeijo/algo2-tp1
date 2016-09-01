@@ -43,17 +43,30 @@ $ $\newline
 {existeCoor($m$, $c$)}
 
 
-%\tadAxiomas[\paratodo{jugador}{j}, \paratodo{String}{s}, \paratodo{coord}{c}, \paratodo{pokemon}{p}] 
+\tadAxiomas[\paratodo{coordenada}{c, c1, c2}, \paratodo{mapa}{m}] 
 
-%\tadAlinearAxiomas{desconectar(capturar(j, p))~}
+\tadAlinearAxiomas{estanConectadas(conectar(m, c1, c2), c1', c2')~}
+
+$ $ \newline 
+\tadAxioma{coordenadas(crearMapa())}{$\emptyset$}
+\tadAxioma{coordenadas(agCoord(m, c))}{Ag(c, cooerdenadas(m))}
+\tadAxioma{coordenadas(conectar(m, c, c'))}{cooerdenadas(m)}
+
+$ $ \newline 
+\tadAxioma{existeCoor(crearMapa(), c1)}{false}
+\tadAxioma{existeCoor(agCoord(m, c1), c1')}{\IF c1 == c1' THEN true ELSE existeCoor(m) FI}
+\tadAxioma{existeCoor(conectar(m, c1, c2), c1')}{\IF c1 == c1' $\lor$ c2 == c1' THEN true ELSE existeCoor(m) FI}
 
 
+$ $ \newline 
+\tadAxioma{estanConectadas(crearMapa(), c1', c2')}{false}
+\tadAxioma{estanConectadas(agCoord(m, c1),  c1', c2')}{\IF c1 == c1' $\lor$ c1 == c2'  THEN false ELSE existeCoor(m) FI}
+\tadAxioma{estanConectadas(conectar(m, c1, c2), c1', c2')}{\IF c1 == c1' $\land$ c2 == c2' THEN true ELSE existeCoor(m) FI}
 
-
-
-
-
-
+$ $ \newline 
+\tadAxioma{dameConexiones(crearMapa(), c1)}{$\emptyset$}
+\tadAxioma{dameConexiones(agCoord(m, c), c1)}{dameConexiones(m)}
+\tadAxioma{dameConexiones(conectar(m, c, c'), c1)}{\IF c == c1 THEN Ag(c', dameConexiones(m)) ELSE { \IF  c' == c1  THEN Ag(c, dameConexiones(m)) ELSE dameConexiones(m) FI } FI}
 
 
 \end{tad}

@@ -32,9 +32,9 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 % PARA HACER:
 % Indices de captura y funciones cuentapokemones
 
-\tadOperacion{moverJugador}{pgo,jugador,coordenada}{pgo}{}
-\tadOperacion{conectarJug}{pgo, jugador}{pgo}{}
-\tadOperacion{desconectarJug}{pgo, jugador}{pgo}{} $\newline $
+\tadOperacion{moverJugador}{pgo,jugador/j,coordenada/c}{pgo}{sanciones(j) $\leq$ 4 $\land$ existeCoor(mapa(pgo))}
+\tadOperacion{conectarJug}{pgo, jugador/j,coordenada/c}{pgo}{sanciones(j) $\leq$ 4 $\land$ existeCoor(mapa(pgo))}
+\tadOperacion{desconectarJug}{pgo, jugador/j}{pgo}{sanciones(j) $\leq$ 4 $\land$ conectado(j)} $\newline $
 
 \tadOperacion{movimientoValido}{map, coordenada, coordenada}{bool}{}
 \tadOperacion{distanciaMenorA}{nat, coordenada, coordenada}{bool}{}
@@ -120,7 +120,7 @@ $ $\newline
 \tadAxioma{aplicarSancion(agJugador($pgo$, $j$),$j'$)}{
 \IF $j = j'$
 THEN
-{\IF $sanciones(j) \geq 4$ THEN $pgo$ ELSE agJugador($pgo$, sancionar($j$)) FI}
+agJugador($pgo$, sancionar($j$))
 ELSE 
 agJugador(aplicarSancion($pgo$, $j'$), $j$)
 FI
@@ -202,7 +202,7 @@ FI
 
 $ $\newline
 \tadAxioma{cuentaTotalPokemones(crearPGO($mapa$))}{0}
-\tadAxioma{cuentaTotalPokemones(agJugador($pgo$, $j$))}{long(capturados($j$)) + cuentaTotalPokemones($pgo$)}
+\tadAxioma{cuentaTotalPokemones(agJugador($pgo$, $j$))}{\IF sanciones(j) $\leq$ 4 THEN long(capturados($j$)) + cuentaTotalPokemones($pgo$) ELSE 0 + cuentaTotalPokemones($pgo$) FI}
 \tadAxioma{cuentaTotalPokemones(agPknodo($pgo$, $pknodo$))}{1 + cuentaTotalPokemones($pgo$)}
 
 \end{tad}
