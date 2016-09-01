@@ -53,7 +53,8 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 
 
 \tadOperacion{cuentaTotalPokemones}{pgo}{Nat}{}
-
+\tadOperacion{cuentaTipoPokemones}{pgo, pokemon/q}{Nat}{}
+\tadOperacion{indiceDeRareza}{pgo, pokemon/q}{Nat}{cuentaTotalPokemones(pgo) > \hspace{1mm}0}
 
 % PARA HACER:
 % Hay que diferenciar el nombre del tipo pgo con el nombre de variable pgo
@@ -204,5 +205,17 @@ $ $\newline
 \tadAxioma{cuentaTotalPokemones(crearPGO($mapa$))}{0}
 \tadAxioma{cuentaTotalPokemones(agJugador($pgo$, $j$))}{\IF sanciones(j) $\leq$ 4 THEN long(capturados($j$)) + cuentaTotalPokemones($pgo$) ELSE 0 + cuentaTotalPokemones($pgo$) FI}
 \tadAxioma{cuentaTotalPokemones(agPknodo($pgo$, $pknodo$))}{1 + cuentaTotalPokemones($pgo$)}
+
+$ $\newline
+\tadAxioma{cuentaTipoPokemones(crearPGO($mapa$), $q$)}{0}
+\tadAxioma{cuentaTipoPokemones(agPknodo($pgo$, $pknodo$), $q$)}{
+\IF q = damePokemon($pknodo$)
+THEN
+1 + cuentaTipoPokemones($pgo$)
+ELSE
+cuentaTipoPokemones($pgo$)
+FI
+}
+\tadAxioma{cuentaTipoPokemones(agJugador($pgo$, $j$), $q$)}{cantPoke($j$, $q$) + cuentaTipoPokemones($pgo$, $q$)}
 
 \end{tad}

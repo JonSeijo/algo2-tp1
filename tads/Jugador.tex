@@ -30,6 +30,7 @@ $(conectado(j) \igobs conectado(j')) \land $\newline}
 
 \tadOtrasOperaciones
 \tadOperacion{desconectar}{jugador/j}{jugador}{conectado(j)}
+\tadOperacion{cantPoke}{jugador/j, pokemon/q}{nat}{}
 
 \tadAxiomas[\paratodo{jugador}{j}, \paratodo{String}{s}, \paratodo{coord}{c}, \paratodo{pokemon}{p}] 
 
@@ -76,4 +77,15 @@ $ $\newline
 \tadAxioma{capturados(mover($j$, $c$))}{capturados($j$)}
 \tadAxioma{capturados(capturar($j$, $p$))}{$p$ \circulito capturados($j$)}
 \tadAxioma{capturados(sancionar($j$))}{capturados($j$)}
+
+$ $\newline
+\tadAxioma{cantPoke(crearJugador($s$, $c$), $q$)}{0}
+\tadAxioma{cantPoke(sancionar($j$), $q$)}{cantPoke($j$, $q$)}
+\tadAxioma{cantPoke(conectar($j$, $c$), $q$)}{cantPoke($j$, $q$)}
+\tadAxioma{cantPoke(capturar($j$, $p$), $q$)}{\IF p = q THEN 
+1 + cantPoke($j$, $q$)
+ELSE cantPoke($j$, $q$)
+FI
+}
+
 \end{tad}
