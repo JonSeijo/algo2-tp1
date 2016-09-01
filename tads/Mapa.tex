@@ -49,8 +49,8 @@ $ $\newline
 
 $ $ \newline 
 \tadAxioma{coordenadas(crearMapa())}{$\emptyset$}
-\tadAxioma{coordenadas(agCoord(m, c))}{Ag(c, cooerdenadas(m))}
-\tadAxioma{coordenadas(conectar(m, c, c'))}{cooerdenadas(m)}
+\tadAxioma{coordenadas(agCoord(m, c))}{Ag(c, coordenadas(m))}
+\tadAxioma{coordenadas(conectar(m, c, c'))}{coordenadas(m)}
 
 $ $ \newline 
 \tadAxioma{existeCoor(crearMapa(), c1)}{false}
@@ -61,7 +61,7 @@ $ $ \newline
 $ $ \newline 
 \tadAxioma{estanConectadas(crearMapa(), c1', c2')}{false}
 \tadAxioma{estanConectadas(agCoord(m, c1),  c1', c2')}{\IF c1 == c1' $\lor$ c1 == c2'  THEN false ELSE existeCoor(m) FI}
-\tadAxioma{estanConectadas(conectar(m, c1, c2), c1', c2')}{\IF c1 == c1' $\land$ c2 == c2' THEN true ELSE existeCoor(m) FI}
+\tadAxioma{estanConectadas(conectar(m, c1, c2), c1', c2')}{\IF (c1 == c1' $\land$ c2 == c2') $\lor$ (c1 == c2' $\land$ c2 == c1') THEN true ELSE existeCoor(m) FI}
 
 $ $ \newline 
 \tadAxioma{dameConexiones(crearMapa(), c1)}{$\emptyset$}
