@@ -35,13 +35,16 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 \tadOperacion{moverJugador}{pgo,jugador/j,coordenada/c}{pgo}{sanciones(j) $\leq$ 4 $\land$ existeCoor(mapa(pgo))}
 \tadOperacion{conectarJug}{pgo, jugador/j,coordenada/c}{pgo}{sanciones(j) $\leq$ 4 $\land$ existeCoor(mapa(pgo)) $\land$ $\neg$conectado(j)}
 \tadOperacion{desconectarJug}{pgo, jugador/j}{pgo}{sanciones(j) $\leq$ 4 $\land$ conectado(j)} $\newline $
+\tadOperacion{capturarJug}{pGo/pgo, jugador/j, pokemon}{pGo}{$j$ $\in$ jugadores($pgo$)} $\newline $
 
 \tadOperacion{movimientoValido}{map, coordenada, coordenada}{bool}{}
 \tadOperacion{distanciaMenorA}{nat, coordenada, coordenada}{bool}{}
+\tadOperacion{enRango2}{coordenada, coordenada}{bool}{}
 
 \tadOperacion{jugadoresEnRango}{pgo, pknodo}{conj(jugador)}{}
 \tadOperacion{pknodosCapturables}{pgo}{conj(pknodo)}{}
-\tadOperacion{elegirCapturador}{pgo}{pknodo}{}
+%Estoy bastante seguro que esta de mas. Creo que fue reemplazada por 'jugElegido'
+%\tadOperacion{elegirCapturador}{pgo}{pknodo}{}
 \tadOperacion{manejarCapturas}{pgo, jugador}{pgo}{}
 \tadOperacion{aplicarSancion}{pgo,jugador/j}{pgo}{} $\newline $
 
@@ -99,7 +102,7 @@ FI
 % MovimientoValido(mapa, pos1, pos2)
 $ $\newline
 \tadAxioma{movimientoValido($map$, $pos1$, $pos2$)}
-{distanciaMenorA10($pos1$, $pos2$) $\land$ existeCoor($map$, $pos1$) $\land$ existeCoor($map$, $pos2$)
+{distanciaMenorA($10$, $pos1$, $pos2$) $\land$ existeCoor($map$, $pos1$) $\land$ existeCoor($map$, $pos2$)
 $\yluego$ hayCamino($map$, $pos1$, $pos2$)}
 
 
@@ -108,6 +111,14 @@ $ $\newline
 \tadAxioma{distanciaMenorA($n$, $c1$, $c2$)}
 {($\Pi_2(c1) - \Pi_1(c1)) * (\Pi_2(c1) - \Pi_1(c1)$)  $+$ $ $\newline
 ($\Pi_2(c2) - \Pi_1(c2)) * (\Pi_2(c2) - \Pi_1(c2)$)  $\leq$ $n * n$}
+
+
+% EnRango2(c1,c2)
+$ $\newline
+\tadAxioma{enRango2($c1$, $c2$)}
+{distanciaMenorA(2, $c1$, $c2$)}
+
+
 
 % ManejarCapturas (pgo, nuevoJug)
 $ $\newline
@@ -176,7 +187,7 @@ $ $\newline
 
 % RealizaCapturas (pgo)
 $ $\newline
-\tadAxioma{realizarCapturas($pgo$)}{capturasPorNodo($pgo$, nodosCapturables($pgo$))}
+\tadAxioma{realizarCapturas($pgo$)}{capturarPorNodo($pgo$, nodosCapturables($pgo$))}
 
 
 % CapturasPorNodo (pgo, pknodosRestantes)
@@ -186,7 +197,7 @@ $ $\newline
 THEN
 $pgo$
 ELSE 
-capturarPorNodo(capturar($pgo$, jugElegido($pgo$,dameUno($pknodos$)), pokemon(dameUno($pknodos$))), sinUno($pknodos$))
+capturarPorNodo(capturarJug($pgo$, jugElegido($pgo$,dameUno($pknodos$)), damePokemon(dameUno($pknodos$))), sinUno($pknodos$))
 FI}
 
 % EliminarNodos (pgo)
@@ -222,6 +233,21 @@ ELSE
 agJugador(desconectarJug($pgo$, $j'$), $j$)
 FI
 }
+
+% DesconectarJug(pgo, j)
+$ $\newline
+\tadAxioma{capturarJug(agPknodo($pgo$, $pknodo$), $j$, $p$)}
+{agPknodo(capturarJug($pgo$, $j$, $p$), $pknodo$)}
+
+\tadAxioma{capturarJug(agJugador($pgo$, $j$), $j'$, $p$)}
+{
+\IF $j = j'$ THEN
+agJugador($pgo$, capturar($j$, $p$))  % este capturar es generador de jugador, devuelve j desconectado
+ELSE 
+agJugador(capturarJug($pgo$, $j'$), $j$)
+FI
+}
+
 
 
 
