@@ -15,8 +15,8 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 \tadGeneradores
 
 \tadOperacion{crearPGO}{mapa}{pgo}{}
-\tadOperacion{agPknodo}{pgo/$pg$, pknodo/$nodo$}{pgo}{$nodo \in$ pokenodos($pg$)}
-\tadOperacion{agJugador}{pgo/$pg$, jugador/$j$}{pgo}{$j \in$ jugadores($pg$)}
+\tadOperacion{agPknodo}{pgo/$pg$, pknodo/$nodo$}{pgo}{$nodo \not \in$ pokenodos($pg$)}
+\tadOperacion{agJugador}{pgo/$pg$, jugador/$j$}{pgo}{$nombre(j) \not \in$ nombres($pg$)}
 
 \tadOtrasOperaciones
 
@@ -60,6 +60,8 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 \tadOperacion{indeDeRareza}{pgo, pokemon/q}{Nat}{cuentaTotalPokemones(pgo) > \hspace{1mm}0}
 \tadOperacion{divEntera}{Nat/n, Nat/m}{Nat}{m > 0}
 
+%Devuelve los nombres de todos los jugadores
+\tadOperacion{nombres}{pgo}{conj(string)}{}
 % PARA HACER:
 % Hay que diferenciar el nombre del tipo pgo con el nombre de variable pgo
 % variable -> pgo     tipo -> pGO   (la idea es que la variable sea mas facil de escribir)
@@ -287,5 +289,12 @@ ELSE
 1 + divEntera($n - m$, $m$)
 FI
 }
+
+
+$ $\newline
+\tadAxioma{nombres(crearPGO($mapa$))}{$\emptyset$}
+\tadAxioma{nombres(agJugador($pgo$, $j$))}{Ag(nombre($j$), nombres($pgo$))}
+\tadAxioma{nombres(agPknodo($pgo$, $pknodo$))}{nombres($pgo$)}
+
 
 \end{tad}
