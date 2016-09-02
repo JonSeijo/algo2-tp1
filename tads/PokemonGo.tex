@@ -54,7 +54,8 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 
 \tadOperacion{cuentaTotalPokemones}{pgo}{Nat}{}
 \tadOperacion{cuentaTipoPokemones}{pgo, pokemon/q}{Nat}{}
-\tadOperacion{indiceDeRareza}{pgo, pokemon/q}{Nat}{cuentaTotalPokemones(pgo) > \hspace{1mm}0}
+\tadOperacion{indeDeRareza}{pgo, pokemon/q}{Nat}{cuentaTotalPokemones(pgo) > \hspace{1mm}0}
+\tadOperacion{divEntera}{Nat/n, Nat/m}{Nat}{m > 0}
 
 % PARA HACER:
 % Hay que diferenciar el nombre del tipo pgo con el nombre de variable pgo
@@ -239,6 +240,26 @@ ELSE
 cuentaTipoPokemones($pgo$)
 FI
 }
-\tadAxioma{cuentaTipoPokemones(agJugador($pgo$, $j$), $q$)}{cantPoke($j$, $q$) + cuentaTipoPokemones($pgo$, $q$)}
+\tadAxioma{cuentaTipoPokemones(agJugador($pgo$, $j$), $q$)}{
+\IF sanciones($j$) $\leq$ 4
+THEN
+cantPoke($j$, $q$) + cuentaTipoPokemones($pgo$, $q$)
+ELSE
+cuentaTipoPokemones($pgo$, $q$)
+FI
+}
+
+$ $\newline
+\tadAxioma{indDeRareza($pgo$, $q$)}{100 - divEntera(cuentaTipoPokemones($pgo$, $q$) x 100, cuentaTotalPokemones($pgo$, $q$))}
+
+$ $\newline
+\tadAxioma{divEntera($n$, $m$)}{
+\IF n\hspace{1mm}< \hspace{1mm} m
+THEN
+0
+ELSE
+1 + divEntera($n - m$, $m$)
+FI
+}
 
 \end{tad}
