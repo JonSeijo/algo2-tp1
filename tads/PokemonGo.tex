@@ -41,7 +41,8 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 
 \tadOperacion{jugadoresEnRango}{pgo, pknodo}{conj(jugador)}{}
 \tadOperacion{pknodosCapturables}{pgo}{conj(pknodo)}{}
-\tadOperacion{elegirCapturador}{pgo}{pknodo}{}
+%Estoy bastante seguro que esta de mas. Creo que fue reemplazada por 'jugElegido'
+%\tadOperacion{elegirCapturador}{pgo}{pknodo}{}
 \tadOperacion{manejarCapturas}{pgo, jugador}{pgo}{}
 \tadOperacion{aplicarSancion}{pgo,jugador/j}{pgo}{} $\newline $
 
@@ -175,7 +176,7 @@ $ $\newline
 
 % RealizaCapturas (pgo)
 $ $\newline
-\tadAxioma{realizarCapturas($pgo$)}{capturasPorNodo($pgo$, nodosCapturables($pgo$))}
+\tadAxioma{realizarCapturas($pgo$)}{capturarPorNodo($pgo$, nodosCapturables($pgo$))}
 
 
 % CapturasPorNodo (pgo, pknodosRestantes)
