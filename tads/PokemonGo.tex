@@ -35,6 +35,7 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 \tadOperacion{moverJugador}{pgo,jugador/j,coordenada/c}{pgo}{sanciones(j) $\leq$ 4 $\land$ existeCoor(mapa(pgo))}
 \tadOperacion{conectarJug}{pgo, jugador/j,coordenada/c}{pgo}{sanciones(j) $\leq$ 4 $\land$ existeCoor(mapa(pgo)) $\land$ $\neg$conectado(j)}
 \tadOperacion{desconectarJug}{pgo, jugador/j}{pgo}{sanciones(j) $\leq$ 4 $\land$ conectado(j)} $\newline $
+\tadOperacion{capturarJug}{pGo/pgo, jugador/j, pokemon}{pGo}{$j$ $\in$ jugadores($pgo$)} $\newline $
 
 \tadOperacion{movimientoValido}{map, coordenada, coordenada}{bool}{}
 \tadOperacion{distanciaMenorA}{nat, coordenada, coordenada}{bool}{}
@@ -186,7 +187,7 @@ $ $\newline
 THEN
 $pgo$
 ELSE 
-capturarPorNodo(capturar($pgo$, jugElegido($pgo$,dameUno($pknodos$)), pokemon(dameUno($pknodos$))), sinUno($pknodos$))
+capturarPorNodo(capturarJug($pgo$, jugElegido($pgo$,dameUno($pknodos$)), damePokemon(dameUno($pknodos$))), sinUno($pknodos$))
 FI}
 
 % EliminarNodos (pgo)
@@ -222,6 +223,21 @@ ELSE
 agJugador(desconectarJug($pgo$, $j'$), $j$)
 FI
 }
+
+% DesconectarJug(pgo, j)
+$ $\newline
+\tadAxioma{capturarJug(agPknodo($pgo$, $pknodo$), $j$, $p$)}
+{agPknodo(capturarJug($pgo$, $j$, $p$), $pknodo$)}
+
+\tadAxioma{capturarJug(agJugador($pgo$, $j$), $j'$, $p$)}
+{
+\IF $j = j'$ THEN
+agJugador($pgo$, capturar($j$, $p$))  % este capturar es generador de jugador, devuelve j desconectado
+ELSE 
+agJugador(capturarJug($pgo$, $j'$), $j$)
+FI
+}
+
 
 
 
