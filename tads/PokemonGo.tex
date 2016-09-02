@@ -33,7 +33,7 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 % Indices de captura y funciones cuentapokemones
 
 \tadOperacion{moverJugador}{pgo,jugador/j,coordenada/c}{pgo}{sanciones(j) $\leq$ 4 $\land$ existeCoor(mapa(pgo))}
-\tadOperacion{conectarJug}{pgo, jugador/j,coordenada/c}{pgo}{sanciones(j) $\leq$ 4 $\land$ existeCoor(mapa(pgo))}
+\tadOperacion{conectarJug}{pgo, jugador/j,coordenada/c}{pgo}{sanciones(j) $\leq$ 4 $\land$ existeCoor(mapa(pgo)) $\land$ $\neg$conectado(j)}
 \tadOperacion{desconectarJug}{pgo, jugador/j}{pgo}{sanciones(j) $\leq$ 4 $\land$ conectado(j)} $\newline $
 
 \tadOperacion{movimientoValido}{map, coordenada, coordenada}{bool}{}
@@ -200,6 +200,29 @@ ELSE
 agNodo(eliminarNodos($pgo$), $pnodo$)
 FI
 }
+
+% ConectarJug(pgo, j, c)
+$ $\newline
+\tadAxioma{conectarJug($pgo$, $j$, $npos$)}{
+manejarCapturas($pgo$, conectar($j$, $npos$))
+}
+
+
+% DesconectarJug(pgo, j)
+$ $\newline
+\tadAxioma{desconectarJug(agPknodo($pgo$, $pknodo$), $j$)}
+{agPknodo(desconectarJug($pgo$, $j$), $pknodo$)}
+
+\tadAxioma{desconectarJug(agJugador($pgo$, $j$), $j'$)}
+{
+\IF $j = j'$ THEN
+agJugador($pgo$, desconectar($j$))  % este desconectar es operacion de jugador, devuelve j desconectado
+ELSE 
+agJugador(desconectarJug($pgo$, $j'$), $j$)
+FI
+}
+
+
 
 $ $\newline
 \tadAxioma{cuentaTotalPokemones(crearPGO($mapa$))}{0}
