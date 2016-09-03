@@ -8,7 +8,11 @@ $(capturados(j) \igobs capturados(j')) \land $\newline
 $(sanciones(j) \igobs sanciones(j')) \land $\newline
 $(conectado(j) \igobs conectado(j')) \land $\newline}
 
-\tadAlinearFunciones{crearJugador}{String/nombre,coordenada}{}{jugador}
+\tadExporta{jugador, generadores, observadores, desconectar, cantPoke}
+
+\tadUsa{Bool, Nat, String, Coordenada, Pokemon, Secuencia(Pokemon)}
+
+\tadAlinearFunciones{crearJugador}{String/nombre,coordenada}{}
 
 \tadObservadores
 \tadOperacion{sanciones}{jugador}{nat}{}
