@@ -7,6 +7,8 @@ $(jugadores(pgo) \igobs jugadores(pgo')) \land$\newline
 $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 %\tadAlinearFunciones{pertenecePokemon}{kg, pokemon/p}{conj(jugador)}
 
+\tadExporta {pGo, generadores, observadores, moverJugador, conectarJug, desconectarJug, indDeRareza, nombres}
+
 \tadObservadores
 \tadOperacion{mapa}{pGo}{mapa}{}
 \tadOperacion{jugadores}{pGo}{conj(jugador)}{}
@@ -81,8 +83,8 @@ $ $\newline
 
 \tadOperacion{cuentaTotalPokemones}{pGo}{Nat}{}
 \tadOperacion{cuentaTipoPokemones}{pGo, pokemon/q}{Nat}{}
-\tadOperacion{indeDeRareza}{pGo/pgo, pokemon/q}{Nat}{cuentaTotalPokemones($pgo$) > \hspace{1mm}0}
-\tadOperacion{divEntera}{Nat/n, Nat/m}{Nat}{m > 0}
+\tadOperacion{indDeRareza}{pGo/pgo, pokemon/q}{Nat}{cuentaTotalPokemones($pgo$) > \hspace{1mm}0}
+\tadOperacion{divEntera}{Nat/n, Nat/m}{Nat}{m >\hspace{1mm}0}
 
 %Devuelve los nombres de todos los jugadores
 \tadOperacion{nombres}{pGo}{conj(string)}{}
@@ -210,7 +212,7 @@ $ $\newline
 
 % RealizaCapturas (pgo)
 $ $\newline
-\tadAxioma{realizarCapturas($pgo$)}{capturarPorNodo($pgo$, nodosCapturables($pgo$))}
+\tadAxioma{realizarCapturas($pgo$)}{capturarPorNodo($pgo$, pknodosCapturables($pgo$))}
 
 
 % CapturasPorNodo (pgo, pknodosRestantes)
@@ -223,16 +225,16 @@ ELSE
 capturarPorNodo(capturarJug($pgo$, jugElegido($pgo$,dameUno($pknodos$)), damePokemon(dameUno($pknodos$))), sinUno($pknodos$))
 FI}
 
-% EliminarNodos (pgo)
+% EliminarPokenodos (pgo)
 $ $\newline
-\tadAxioma{eliminarNodos(crearPGO($mapa$))}{crear($mapa$)}
-\tadAxioma{eliminarNodos(agJugador($pgo$, $j$))}{agJugador(eliminarNodos($pgo$), $j$)}
-\tadAxioma{eliminarNodos(agPknodo($pgo$, $pknodo$))}{
+\tadAxioma{eliminarPokenodos(crearPGO($mapa$))}{crear($mapa$)}
+\tadAxioma{eliminarPokenodos(agJugador($pgo$, $j$))}{agJugador(eliminarPokenodos($pgo$), $j$)}
+\tadAxioma{eliminarPokenodos(agPknodo($pgo$, $pknodo$))}{
 \IF contador($pknodo$) $\geq 10$
 THEN
-eliminarNodos($pgo$)
+eliminarPokenodos($pgo$)
 ELSE 
-agNodo(eliminarNodos($pgo$), $pnodo$)
+agNodo(eliminarPokenodos($pgo$), $pnodo$)
 FI
 }
 
@@ -276,7 +278,7 @@ FI
 
 $ $\newline
 \tadAxioma{cuentaTotalPokemones(crearPGO($mapa$))}{0}
-\tadAxioma{cuentaTotalPokemones(agJugador($pgo$, $j$))}{\IF sanciones(j) $\leq$ 4 THEN long(capturados($j$)) + cuentaTotalPokemones($pgo$) ELSE 0 + cuentaTotalPokemones($pgo$) FI}
+\tadAxioma{cuentaTotalPokemones(agJugador($pgo$, $j$))}{\IF sanciones(j) $\leq$ 4 THEN long(capturados($j$)) + cuentaTotalPokemones($pgo$) ELSE cuentaTotalPokemones($pgo$) FI}
 \tadAxioma{cuentaTotalPokemones(agPknodo($pgo$, $pknodo$))}{1 + cuentaTotalPokemones($pgo$)}
 
 $ $\newline
