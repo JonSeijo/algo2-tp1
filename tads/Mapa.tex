@@ -1,14 +1,17 @@
 
 \begin{tad}{\tadNombre{Mapa}}
 \tadGeneros{mapa}
-\tadExporta{mapa, generadores, observadores, hayCamino}
-\tadUsa{\tadNombre{Bool, Coordenada, Conjunto(Coordenada)}}
+
 
 
 %\tadIgualdadObservacionalSimple{}
 
 \tadIgualdadObservacional{m1}{m2}{mapa}{(\paratodo{coordenada}{c1,c2}) $ $\newline $ (existeCoor(m1, c1) \igobs existeCoor(m2, c1)) \yluego $ \\ $((existeCoor(m1, c1) \land existeCoor(m1, c2)) \impluego (estanConectadas(m1, c1, c2)\igobs$ \\ $estanConectadas(m2, c1, c2)))$}
 %\tadAlinearFunciones{crearJugador}{String/nombre,coord}{}{jugador}
+
+\tadExporta{mapa, generadores, observadores, hayCamino}
+\tadUsa{\tadNombre{Bool, Coordenada, Conjunto(Coordenada)}}
+
 
 \tadObservadores
 %\tadOperacion{sanciones}{jugador}{nat}{}
