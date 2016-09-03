@@ -2,8 +2,13 @@
 \begin{tad}{\tadNombre{PokeNodo}}
 \tadGeneros{Pknodo}
 
+
 \tadIgualdadObservacional{pkn}{pkn'}{Pknodo}{$ (damePokemon(pkn)\igobs damePokemon(pkn')) \yluego$\\
 ($posicion(pkn)\igobs posicion(pkn'))  \yluego\ (contador(pkn)\igobs\ contador(pkn')) $}
+
+\tadExporta{Pknodo, generadores, observadores, reiniciar}
+\tadUsa{\tadNombre{Nat, Coordenada, Pokemon}}
+
 
 \tadAlinearFunciones{damePokemon}{pokemon, coordenada}{}{}
 
