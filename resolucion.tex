@@ -11,6 +11,8 @@
 \usepackage{calc}
 \usepackage{aed2-symb,aed2-itef,aed2-tad, caratula}
 \usepackage[utf8]{inputenc}
+\usepackage{listings}
+
 
 % Estos comandos deben ir antes del \maketitle
 \materia{Algoritmos y Estructuras de Datos II} % obligatorio
@@ -27,21 +29,35 @@
 \begin{document}
 
 \maketitle
+\thispagestyle{empty}
 
-%\tableofcontents
+
+\tableofcontents
 
 \pagebreak
 
-
+\section{TAD \tadNombre{PokemonGo}}
 \input{tads/PokemonGo}
 
-\newpage
+$ $\newline
+$ $\newline
+$ $\newline
+$ $\newline
+\section{TAD \tadNombre{Pokemon}}
 
 \textbf{TAD} \textsc{Pokemon} \textbf{ES} \textsc{String}
 
+$ $\newline
+$ $\newline
+\section{TAD \tadNombre{coordenada}}
+
 \textbf{TAD} \textsc{coordenada} \textbf{ES} \textsc{Tupla(nat, nat)}
 
-$ $\newline
+
+\newpage
+
+
+\section{TAD \tadNombre{Mapa}}
 
 \input{tads/Mapa}
 %\newpage
@@ -49,11 +65,20 @@ $ $\newline
 %\input{tads/Pokemon}
 
 \newpage
+\section{TAD \tadNombre{Pokenodo}}
+
 \input{tads/Pokenodo}
 
 
+\newpage
+\section{TAD \tadNombre{Jugador}}
+
+\input{tads/Jugador}
 
 \newpage
-\input{tads/Jugador}
+\section{Informe}
+
+\input{informe}
+
 
 \end{document}
