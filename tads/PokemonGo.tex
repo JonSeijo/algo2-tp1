@@ -9,6 +9,8 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 
 \tadExporta {pGo, generadores, observadores, moverJugador, conectarJug, desconectarJug, indDeRareza, nombres}
 
+\tadUsa {Bool, Nat, Jugador, Conjunto(Jugador), Pokemon, Coordenada, Mapa, PokeNodo, Conjunto(PokeNodo)}
+
 \tadObservadores
 \tadOperacion{mapa}{pGo}{mapa}{}
 \tadOperacion{jugadores}{pGo}{conj(jugador)}{}
@@ -94,7 +96,7 @@ $ $\newline
 
 % Mapa (pgo)
 $ $\newline
-\tadAxioma{mapa(crearPGO($map$))}{$map$}
+\tadAxioma{mapa(crearPGO($map$))}{$mapa$}
 \tadAxioma{mapa(agJugador($pgo$, $j$))}{mapa($pgo$)}
 \tadAxioma{mapa(agPknodo($pgo$, $pknodo$))}{mapa($pgo$)}
 
