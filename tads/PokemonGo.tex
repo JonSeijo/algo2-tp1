@@ -27,32 +27,56 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 % Ver lo de restringir jugadores usando nombre
 
 % PARA HACER:
-% Ver si queremos restringir eliminados, o si hacer un if para ver si esta eliminado, en ese caso no hacer nada
-
-% PARA HACER:
 % Indices de captura y funciones cuentapokemones
 
-\tadOperacion{moverJugador}{pGo/pgo,jugador/j,coordenada/c}{pGo}{sanciones($j$) $\leq$ 4 $\land$ existeCoor(mapa($pgo$))}
-\tadOperacion{conectarJug}{pGo/pgo, jugador/j,coordenada/c}{pGo}{sanciones($j$) $\leq$ 4 $\land$ existeCoor(mapa($pgo$)) $\land$ $\neg$conectado(j)}
-\tadOperacion{desconectarJug}{pGo, jugador/j}{pGo}{sanciones(j) $\leq$ 4 $\land$ conectado(j)} $\newline $
-\tadOperacion{capturarJug}{pGo/pgo, jugador/j, pokemon}{pGo}{$j$ $\in$ jugadores($pgo$)} $\newline $
+% MoverJug
+$ $\newline
+\tadOperacion{moverJugador}{pGo/pgo,jugador/j,coordenada/c}{pGo}
+{$j \in$ jugadores($pgo$) $\yluego$ sanciones($j$) $\leq$ 4 $\land$ conectado($j$) $\land$ existeCoor(mapa($pgo$))}
 
+% ConectarJug
+$ $\newline
+\tadOperacion{conectarJug}{pGo/pgo, jugador/j,coordenada/c}{pGo}
+{$j \in$ jugadores($pgo$) $\yluego$ sanciones($j$) $\leq$ 4 $\land \neg$ conectado($j$) $\land$ existeCoor(mapa($pgo$)) $\land$ $\neg$conectado(j)}
+
+% DesconectarJug
+$ $\newline
+\tadOperacion{desconectarJug}{pGo, jugador/j}{pGo}
+{$j \in$ jugadores($pgo$) $\land$ sanciones(j) $\leq$ 4 $\land$ conectado(j)}
+
+% CapturarJug
+$ $\newline
+\tadOperacion{capturarJug}{pGo/pgo, jugador/j, pokemon}{pGo}
+{$j \in$ jugadores($pgo$) $\land$ sanciones(j) $\leq$ 4 $\land$ conectado(j)} 
+
+$ $\newline
 \tadOperacion{movimientoValido}{map, coordenada, coordenada}{bool}{}
 \tadOperacion{distanciaMenorA}{nat, coordenada, coordenada}{bool}{}
 \tadOperacion{enRango2}{coordenada, coordenada}{bool}{}
 
-\tadOperacion{jugadoresEnRango}{pGo, pknodo}{conj(jugador)}{}
-\tadOperacion{pknodosCapturables}{pGo}{conj(pknodo)}{}
-%Estoy bastante seguro que esta de mas. Creo que fue reemplazada por 'jugElegido'
-%\tadOperacion{elegirCapturador}{pgo}{pknodo}{}
-\tadOperacion{manejarCapturas}{pGo, jugador}{pGo}{}
-\tadOperacion{aplicarSancion}{pGo,jugador/j}{pGo}{} $\newline $
+% JugadoresEnRango
+\tadOperacion{jugadoresEnRango}{pGo/pgo, PkNodo/pknodo}{conj(jugador)}
+{$pknodo \in$ pokenodos($pgo$)}
 
-\tadOperacion{actualizarPknodos}{pGo,jugador/j}{pGo}{}
+\tadOperacion{pknodosCapturables}{pGo}{conj(pknodo)}{}
+
+\tadOperacion{manejarCapturas}{pGo/pgo, jugador/j}{pGo}
+{$j \in$jugadores($pgo$) $\land$ conectado($j$) $\land$ sanciones(j) $\leq$ 4}
+
+\tadOperacion{aplicarSancion}{pGo/pgo,jugador/j}{pGo}
+{$j \in$ jugadores($pgo$)} 
+
+$ $\newline
+
+\tadOperacion{actualizarPknodos}{pGo/pgo,jugador/j}{pGo}
+{$j \in$ jugadores($pgo$)}
+
 \tadOperacion{realizaCapturas}{pGo}{pGo}{}
 \tadOperacion{capturarPorNodo}{pGo,conj(pknodo)}{pGo}{}
 \tadOperacion{eliminarPokenodos}{pGo}{pGo}{}
-\tadOperacion{jugElegido}{pGo, pknodo}{jugador}{}
+
+\tadOperacion{jugElegido}{pGo/pgo, PkNodo/pknodo}{jugador}
+{$pknodo \in$ pokenodos($pgo$) $\yluego$ jugadoresEnRango($pgo$, $pknodo$) $\neq \emptyset$ }
 
 
 \tadOperacion{cuentaTotalPokemones}{pGo}{Nat}{}
@@ -171,7 +195,7 @@ $ $\newline
 \tadAxioma{jugadoresEnRango(crearPGO($mapa$), $pknodo$)}{$\emptyset$}
 \tadAxioma{jugadoresEnRango(agPknodo($pgo$, $pknodo$), $pknodo'$)}{jugadoresEnRango($pgo$, $pknodo'$)}
 \tadAxioma{jugadoresEnRango(agJugador($pgo$, $j$), $pknodo$)}{
-\IF conectado($j$) AND  enRango2($pknodo$, $j$)
+\IF conectado($j$) $\land$  enRango2($pknodo$, $j$)
 THEN
 Ag($j$, jugadoresEnRango($pgo$, $pknodo$))
 ELSE 
