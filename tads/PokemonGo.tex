@@ -7,7 +7,7 @@ $(jugadores(pgo) \igobs jugadores(pgo')) \land$\newline
 $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 %\tadAlinearFunciones{pertenecePokemon}{kg, pokemon/p}{conj(jugador)}
 
-\tadExporta {pGo, generadores, observadores, moverJugador, conectarJug, desconectarJug, indDeRareza, nombres}
+\tadExporta {pGo, generadores, observadores, moverJugador, conectarJug, desconectarJug, posicionJug, indDeRareza, nombres}
 
 \tadUsa {Bool, Nat, Jugador, Conjunto(Jugador), Pokemon, Coordenada, Mapa, PokeNodo, Conjunto(PokeNodo)}
 
@@ -55,6 +55,7 @@ $ $\newline
 \tadOperacion{capturarJug}{pGo/pgo, jugador/j, pokemon}{pGo}
 {$j \in$ jugadores($pgo$) $\land$ sanciones(j) $\leq$ 4 $\land$ conectado(j)} 
 
+
 $ $\newline
 \tadOperacion{movimientoValido}{map, coordenada, coordenada}{bool}{}
 \tadOperacion{distanciaMenorA}{nat, coordenada, coordenada}{bool}{}
@@ -84,6 +85,9 @@ $ $\newline
 \tadOperacion{jugElegido}{pGo/pgo, PkNodo/pknodo}{jugador}
 {$pknodo \in$ pokenodos($pgo$) $\yluego$ jugadoresEnRango($pgo$, $pknodo$) $\neq \emptyset$ }
 
+$ $\newline
+\tadOperacion{posicionJug}{jugador/j}{coordenada}{$j \in$ jugadores($pgo$) $\land$ sanciones(j) $\leq$ 4 $\land$ conectado(j)}
+
 
 \tadOperacion{cuentaTotalPokemones}{pGo}{Nat}{}
 \tadOperacion{cuentaTipoPokemones}{pGo, pokemon/q}{Nat}{}
@@ -98,7 +102,7 @@ $ $\newline
 
 % Mapa (pgo)
 $ $\newline
-\tadAxioma{mapa(crearPGO($map$))}{$mapa$}
+\tadAxioma{mapa(crearPGO($mapa$))}{$mapa$}
 \tadAxioma{mapa(agJugador($pgo$, $j$))}{mapa($pgo$)}
 \tadAxioma{mapa(agPknodo($pgo$, $pknodo$))}{mapa($pgo$)}
 
@@ -241,6 +245,9 @@ ELSE
 agNodo(eliminarPokenodos($pgo$), $pnodo$)
 FI
 }
+
+$ $\newline
+\tadAxioma{posicionJug($j$)}{posicion($j$)}
 
 % ConectarJug(pgo, j, c)
 $ $\newline
