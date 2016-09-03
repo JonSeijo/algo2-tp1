@@ -8,15 +8,15 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 %\tadAlinearFunciones{pertenecePokemon}{kg, pokemon/p}{conj(jugador)}
 
 \tadObservadores
-\tadOperacion{mapa}{pgo}{mapa}{}
-\tadOperacion{jugadores}{pgo}{conj(jugador)}{}
-\tadOperacion{pokenodos}{pgo}{conj(pknodo)}{}
+\tadOperacion{mapa}{pGo}{mapa}{}
+\tadOperacion{jugadores}{pGo}{conj(jugador)}{}
+\tadOperacion{pokenodos}{pGo}{conj(pknodo)}{}
 
 \tadGeneradores
 
-\tadOperacion{crearPGO}{mapa}{pgo}{}
-\tadOperacion{agPknodo}{pgo/$pg$, pknodo/$nodo$}{pgo}{$nodo \not \in$ pokenodos($pg$)}
-\tadOperacion{agJugador}{pgo/$pg$, jugador/$j$}{pgo}{$nombre(j) \not \in$ nombres($pg$)}
+\tadOperacion{crearPGO}{mapa}{pGo}{}
+\tadOperacion{agPknodo}{pGo/$pgo$, pknodo/$nodo$}{pGo}{$nodo \not \in$ pokenodos($pgo$)}
+\tadOperacion{agJugador}{pGo/$pg$, jugador/$j$}{pGo}{$nombre(j) \not \in$ nombres($pgo$)}
 
 \tadOtrasOperaciones
 
@@ -32,39 +32,36 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 % PARA HACER:
 % Indices de captura y funciones cuentapokemones
 
-\tadOperacion{moverJugador}{pgo,jugador/j,coordenada/c}{pgo}{sanciones(j) $\leq$ 4 $\land$ existeCoor(mapa(pgo))}
-\tadOperacion{conectarJug}{pgo, jugador/j,coordenada/c}{pgo}{sanciones(j) $\leq$ 4 $\land$ existeCoor(mapa(pgo)) $\land$ $\neg$conectado(j)}
-\tadOperacion{desconectarJug}{pgo, jugador/j}{pgo}{sanciones(j) $\leq$ 4 $\land$ conectado(j)} $\newline $
+\tadOperacion{moverJugador}{pGo/pgo,jugador/j,coordenada/c}{pGo}{sanciones($j$) $\leq$ 4 $\land$ existeCoor(mapa($pgo$))}
+\tadOperacion{conectarJug}{pGo/pgo, jugador/j,coordenada/c}{pGo}{sanciones($j$) $\leq$ 4 $\land$ existeCoor(mapa($pgo$)) $\land$ $\neg$conectado(j)}
+\tadOperacion{desconectarJug}{pGo, jugador/j}{pGo}{sanciones(j) $\leq$ 4 $\land$ conectado(j)} $\newline $
 \tadOperacion{capturarJug}{pGo/pgo, jugador/j, pokemon}{pGo}{$j$ $\in$ jugadores($pgo$)} $\newline $
 
 \tadOperacion{movimientoValido}{map, coordenada, coordenada}{bool}{}
 \tadOperacion{distanciaMenorA}{nat, coordenada, coordenada}{bool}{}
 \tadOperacion{enRango2}{coordenada, coordenada}{bool}{}
 
-\tadOperacion{jugadoresEnRango}{pgo, pknodo}{conj(jugador)}{}
-\tadOperacion{pknodosCapturables}{pgo}{conj(pknodo)}{}
+\tadOperacion{jugadoresEnRango}{pGo, pknodo}{conj(jugador)}{}
+\tadOperacion{pknodosCapturables}{pGo}{conj(pknodo)}{}
 %Estoy bastante seguro que esta de mas. Creo que fue reemplazada por 'jugElegido'
 %\tadOperacion{elegirCapturador}{pgo}{pknodo}{}
-\tadOperacion{manejarCapturas}{pgo, jugador}{pgo}{}
-\tadOperacion{aplicarSancion}{pgo,jugador/j}{pgo}{} $\newline $
+\tadOperacion{manejarCapturas}{pGo, jugador}{pGo}{}
+\tadOperacion{aplicarSancion}{pGo,jugador/j}{pGo}{} $\newline $
 
-\tadOperacion{actualizarPknodos}{pgo,jugador/j}{pgo}{}
-\tadOperacion{realizaCapturas}{pgo}{pgo}{}
-\tadOperacion{capturarPorNodo}{pgo,conj(pknodo)}{pgo}{}
-\tadOperacion{eliminarPokenodos}{pgo}{pgo}{}
-\tadOperacion{jugElegido}{pgo, pknodo}{jugador}{}
+\tadOperacion{actualizarPknodos}{pGo,jugador/j}{pGo}{}
+\tadOperacion{realizaCapturas}{pGo}{pGo}{}
+\tadOperacion{capturarPorNodo}{pGo,conj(pknodo)}{pGo}{}
+\tadOperacion{eliminarPokenodos}{pGo}{pGo}{}
+\tadOperacion{jugElegido}{pGo, pknodo}{jugador}{}
 
 
-\tadOperacion{cuentaTotalPokemones}{pgo}{Nat}{}
-\tadOperacion{cuentaTipoPokemones}{pgo, pokemon/q}{Nat}{}
-\tadOperacion{indeDeRareza}{pgo, pokemon/q}{Nat}{cuentaTotalPokemones(pgo) > \hspace{1mm}0}
+\tadOperacion{cuentaTotalPokemones}{pGo}{Nat}{}
+\tadOperacion{cuentaTipoPokemones}{pGo, pokemon/q}{Nat}{}
+\tadOperacion{indeDeRareza}{pGo/pgo, pokemon/q}{Nat}{cuentaTotalPokemones($pgo$) > \hspace{1mm}0}
 \tadOperacion{divEntera}{Nat/n, Nat/m}{Nat}{m > 0}
 
 %Devuelve los nombres de todos los jugadores
-\tadOperacion{nombres}{pgo}{conj(string)}{}
-% PARA HACER:
-% Hay que diferenciar el nombre del tipo pgo con el nombre de variable pgo
-% variable -> pgo     tipo -> pGO   (la idea es que la variable sea mas facil de escribir)
+\tadOperacion{nombres}{pGo}{conj(string)}{}
 \tadAxiomas[\paratodo{pGo}{pgo}]
 
 %\tadAlinearAxiomas{}
