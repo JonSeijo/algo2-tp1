@@ -13,6 +13,7 @@
 \tadUsa{\tadNombre{Bool, Coordenada, Conjunto(Coordenada)}}
 
 
+
 \tadObservadores
 %\tadOperacion{sanciones}{jugador}{nat}{}
 \tadOperacion{existeCoor}{mapa, coordenada}{bool}{}
@@ -42,7 +43,7 @@ $ $\newline
 $\land$ ($aRevisar \cap recorridas = \emptyset$) $\land$ ($c2 \in$ coordenadas($m$))}
 
 $ $\newline
-\tadOperacion{proximasARevisar}{conj(coordenada)/$aRevisar$, conj(coordenada)/$recorridas$}{conj(coordenada)}{$aRevisar$ $\neq$ $\emptyset$}
+\tadOperacion{proxARevisar}{conj(coordenada)/$aRevisar$, conj(coordenada)/$recorridas$}{conj(coordenada)}{$aRevisar$ $\neq$ $\emptyset$}
 
 $ $\newline
 \tadOperacion{dameConexiones}{mapa/$m$, coordenada/$c$}{conj(coordenada)}
@@ -90,7 +91,7 @@ ELSE
 	{\IF estanConectadas($m$, dameUno($aRevisar$), $c2$) THEN 
 	$true$	
 	ELSE 
-	buscarCamino($m$,proximasARevisar($aRevisar$,$recorridas$), $    $Ag(dameUno($aRevisar$), 		$recorridas$))
+	buscarCamino($m$,proxARevisar($aRevisar$,$recorridas$), $    $Ag(dameUno($aRevisar$), 		$recorridas$))
 	FI}$ $\newline
 FI
 }
@@ -98,7 +99,7 @@ FI
 
 % ProximasARevisar(aRevisar, recorridas)
 $ $\newline
-\tadAxioma{proximasARevisar($aRevisar$, $recorridas$)}
+\tadAxioma{proxARevisar($aRevisar$, $recorridas$)}
 {dameConexiones(dameUno($aRevisar$)) $\cup$ sinUno($aRevisar$) - $recorridas$
 }
 
