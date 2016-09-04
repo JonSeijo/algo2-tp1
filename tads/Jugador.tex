@@ -8,7 +8,7 @@ $(capturados(j) \igobs capturados(j')) \land $\newline
 $(sanciones(j) \igobs sanciones(j')) \land $\newline
 $(conectado(j) \igobs conectado(j')) \land $\newline}
 
-\tadExporta{jugador, generadores, observadores, desconectar, cantPoke}
+\tadExporta{jugador, generadores, observadores, desconectar, cantPoke, eliminado}
 
 \tadUsa{\tadNombre{Bool, Nat, String, Coordenada, Pokemon, Secuencia(Pokemon)}}
 
@@ -33,6 +33,7 @@ $(conectado(j) \igobs conectado(j')) \land $\newline}
 
 
 \tadOtrasOperaciones
+\tadOperacion{eliminado}{jugador}{bool}{}
 \tadOperacion{desconectar}{jugador/j}{jugador}{conectado(j)}
 \tadOperacion{cantPoke}{jugador/j, pokemon/q}{nat}{}
 
@@ -91,5 +92,10 @@ $ $\newline
 ELSE cantPoke($j$, $q$)
 FI
 }
+
+
+$ $\newline
+\tadAxioma{eliminado($j$)}{sanciones($j$) $\geq$ 5}
+
 
 \end{tad}

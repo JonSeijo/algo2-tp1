@@ -22,7 +22,7 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 
 \tadOperacion{crearPGO}{mapa}{pGo}{}
 \tadOperacion{agPknodo}{pGo/$pgo$, pknodo/$nodo$}{pGo}{$nodo \not \in$ pokenodos($pgo$)}
-\tadOperacion{agJugador}{pGo/$pg$, jugador/$j$}{pGo}{$nombre(j) \not \in$ nombresJugadores($pgo$)}
+\tadOperacion{agJugador}{pGo/$pgo$, jugador/$j$}{pGo}{$nombre(j) \not \in$ nombresJugadores($pgo$)}
 
 \tadOtrasOperaciones
 
@@ -32,22 +32,22 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 % MoverJug
 $ $\newline
 \tadOperacion{moverJugador}{pGo/pgo,jugador/j,coordenada/c}{pGo}
-{$j \in$ jugadores($pgo$) $\yluego$ sanciones($j$) $\leq$ 4 $\land$ conectado($j$) $\land$ existeCoor(mapa($pgo$))}
+{$j \in$ jugadores($pgo$) $\yluego$ $\neg$eliminado($j$) $\land$ conectado($j$) $\land$ existeCoor(mapa($pgo$))}
 
 % ConectarJug
 $ $\newline
 \tadOperacion{conectarJug}{pGo/pgo, jugador/j,coordenada/c}{pGo}
-{$j \in$ jugadores($pgo$) $\yluego$ sanciones($j$) $\leq$ 4 $\land \neg$ conectado($j$) $\land$ existeCoor(mapa($pgo$)) $\land$ $\neg$conectado(j)}
+{$j \in$ jugadores($pgo$) $\yluego$ $\neg$eliminado($j$) $\land \neg$ conectado($j$) $\land$ existeCoor(mapa($pgo$)) $\land$ $\neg$conectado(j)}
 
 % DesconectarJug
 $ $\newline
 \tadOperacion{desconectarJug}{pGo, jugador/j}{pGo}
-{$j \in$ jugadores($pgo$) $\land$ sanciones(j) $\leq$ 4 $\land$ conectado(j)}
+{$j \in$ jugadores($pgo$) $\land$ $\neg$eliminado($j$) $\land$ conectado(j)}
 
 % CapturarJug
 $ $\newline
 \tadOperacion{capturarJug}{pGo/pgo, jugador/j, pokemon}{pGo}
-{$j \in$ jugadores($pgo$) $\land$ sanciones(j) $\leq$ 4 $\land$ conectado(j)} 
+{$j \in$ jugadores($pgo$) $\land$ $\neg$eliminado($j$) $\land$ conectado(j)} 
 
 
 $ $\newline
@@ -62,7 +62,7 @@ $ $\newline
 \tadOperacion{pknodosCapturables}{pGo}{conj(pknodo)}{}
 
 \tadOperacion{manejarCapturas}{pGo/pgo, jugador/j}{pGo}
-{$j \in$jugadores($pgo$) $\land$ conectado($j$) $\land$ sanciones(j) $\leq$ 4}
+{$j \in$jugadores($pgo$) $\land$ conectado($j$) $\land$ $\neg$eliminado($j$)}
 
 \tadOperacion{aplicarSancion}{pGo/pgo,jugador/j}{pGo}
 {$j \in$ jugadores($pgo$)} 
@@ -80,7 +80,7 @@ $ $\newline
 {$pknodo \in$ pokenodos($pgo$) $\yluego$ jugadoresEnRango($pgo$, $pknodo$) $\neq \emptyset$ }
 
 $ $\newline
-\tadOperacion{posicionJug}{jugador/j}{coordenada}{$j \in$ jugadores($pgo$) $\land$ sanciones(j) $\leq$ 4 $\land$ conectado(j)}
+\tadOperacion{posicionJug}{jugador/j}{coordenada}{$j \in$ jugadores($pgo$) $\land$ $\neg$eliminado($j$) $\land$ conectado(j)}
 
 
 \tadOperacion{cuentaTotalPokemones}{pGo}{Nat}{}
@@ -283,7 +283,7 @@ FI
 
 $ $\newline
 \tadAxioma{cuentaTotalPokemones(crearPGO($mapa$))}{0}
-\tadAxioma{cuentaTotalPokemones(agJugador($pgo$, $j$))}{\IF sanciones(j) $\leq$ 4 THEN long(capturados($j$)) + cuentaTotalPokemones($pgo$) ELSE cuentaTotalPokemones($pgo$) FI}
+\tadAxioma{cuentaTotalPokemones(agJugador($pgo$, $j$))}{\IF $\neg$eliminado($j$) THEN long(capturados($j$)) + cuentaTotalPokemones($pgo$) ELSE cuentaTotalPokemones($pgo$) FI}
 \tadAxioma{cuentaTotalPokemones(agPknodo($pgo$, $pknodo$))}{1 + cuentaTotalPokemones($pgo$)}
 
 $ $\newline
@@ -297,7 +297,7 @@ cuentaTipoPokemones($pgo$)
 FI
 }
 \tadAxioma{cuentaTipoPokemones(agJugador($pgo$, $j$), $q$)}{
-\IF sanciones($j$) $\leq$ 4
+\IF $\neg$eliminado($j$)
 THEN
 cantPoke($j$, $q$) + cuentaTipoPokemones($pgo$, $q$)
 ELSE
