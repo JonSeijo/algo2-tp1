@@ -7,7 +7,7 @@ $(jugadores(pgo) \igobs jugadores(pgo')) \land$\newline
 $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 %\tadAlinearFunciones{pertenecePokemon}{kg, pokemon/p}{conj(jugador)}
 
-\tadExporta {pGo, generadores, observadores, moverJugador, conectarJug, desconectarJug, posicionJug, $ $\newline indDeRareza, nombres}
+\tadExporta {pGo, generadores, observadores, moverJugador, conectarJug, desconectarJug, posicionJug, $ $\newline indDeRareza, nombresJugadores}
 
 \tadUsa {\tadNombre{Bool, Nat, Jugador, Conjunto(Jugador), Pokemon, Coordenada, Mapa, PokeNodo, Conjunto(PokeNodo)}}
 
@@ -22,18 +22,12 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 
 \tadOperacion{crearPGO}{mapa}{pGo}{}
 \tadOperacion{agPknodo}{pGo/$pgo$, pknodo/$nodo$}{pGo}{$nodo \not \in$ pokenodos($pgo$)}
-\tadOperacion{agJugador}{pGo/$pg$, jugador/$j$}{pGo}{$nombre(j) \not \in$ nombres($pgo$)}
+\tadOperacion{agJugador}{pGo/$pg$, jugador/$j$}{pGo}{$nombre(j) \not \in$ nombresJugadores($pgo$)}
 
 \tadOtrasOperaciones
 
 % PARA HACER:
-% Es importante agregar todas las restricciones !!!
-
-% PARA HACER:
-% Ver lo de restringir jugadores usando nombre
-
-% PARA HACER:
-% Indices de captura y funciones cuentapokemones
+%  moverJugador, conectarJug, desconectarJug, posicionJug, indDeRareza, nombresJugadores
 
 % MoverJug
 $ $\newline
@@ -94,8 +88,8 @@ $ $\newline
 \tadOperacion{indDeRareza}{pGo/pgo, pokemon/q}{Nat}{cuentaTotalPokemones($pgo$) > \hspace{1mm}0}
 \tadOperacion{divEntera}{Nat/n, Nat/m}{Nat}{m >\hspace{1mm}0}
 
-%Devuelve los nombres de todos los jugadores
-\tadOperacion{nombres}{pGo}{conj(string)}{}
+%Devuelve los nombresJugadores de todos los jugadores
+\tadOperacion{nombresJugadores}{pGo}{conj(string)}{}
 \tadAxiomas[\paratodo{pGo}{pgo}]
 
 %\tadAlinearAxiomas{}
@@ -326,9 +320,9 @@ FI
 
 
 $ $\newline
-\tadAxioma{nombres(crearPGO($mapa$))}{$\emptyset$}
-\tadAxioma{nombres(agJugador($pgo$, $j$))}{Ag(nombre($j$), nombres($pgo$))}
-\tadAxioma{nombres(agPknodo($pgo$, $pknodo$))}{nombres($pgo$)}
+\tadAxioma{nombresJugadores(crearPGO($mapa$))}{$\emptyset$}
+\tadAxioma{nombresJugadores(agJugador($pgo$, $j$))}{Ag(nombre($j$), nombresJugadores($pgo$))}
+\tadAxioma{nombresJugadores(agPknodo($pgo$, $pknodo$))}{nombresJugadores($pgo$)}
 
 
 \end{tad}
