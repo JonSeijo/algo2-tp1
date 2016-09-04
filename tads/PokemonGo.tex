@@ -12,7 +12,7 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 \tadUsa {\tadNombre{Bool, Nat, Jugador, Conjunto(Jugador), Pokemon, Coordenada, Mapa, PokeNodo, Conjunto(PokeNodo)}}
 
 \tadAlinearFunciones{cuentaTotalPokemones}{pGo/pgo,jugador/j,coordenada/c}{}
-
+	
 \tadObservadores
 \tadOperacion{mapa}{pGo}{mapa}{}
 \tadOperacion{jugadores}{pGo}{conj(jugador)}{}
@@ -26,8 +26,6 @@ $(pokenodos(pgo) \igobs pokenodos(pgo'))$}
 
 \tadOtrasOperaciones
 
-% PARA HACER:
-%  moverJugador, conectarJug, desconectarJug, posicionJug, indDeRareza, nombresJugadores
 
 % MoverJug
 $ $\newline
@@ -49,6 +47,18 @@ $ $\newline
 \tadOperacion{capturarJug}{pGo/pgo, jugador/j, pokemon}{pGo}
 {$j \in$ jugadores($pgo$) $\land$ $\neg$eliminado($j$) $\land$ conectado(j)} 
 
+% PosicionJug (da la pos de un jugador)
+$ $\newline
+\tadOperacion{posicionJug}{jugador/j}{coordenada}
+{$j \in$ jugadores($pgo$) $\land$ $\neg$eliminado($j$) $\land$ conectado(j)}
+
+% NombresJugadores
+$ $\newline 
+\tadOperacion{nombresJugadores}{pGo}{conj(string)}{}
+
+% AplicarSancion
+\tadOperacion{aplicarSancion}{pGo/pgo,jugador/j}{pGo}
+{$j \in$ jugadores($pgo$)} 
 
 $ $\newline
 \tadOperacion{movimientoValido}{map, coordenada, coordenada}{bool}{}
@@ -56,40 +66,33 @@ $ $\newline
 \tadOperacion{enRango2}{coordenada, coordenada}{bool}{}
 
 % JugadoresEnRango
+$ $\newline
+\tadOperacion{pknodosCapturables}{pGo}{conj(pknodo)}{}
+
 \tadOperacion{jugadoresEnRango}{pGo/pgo, PkNodo/pknodo}{conj(jugador)}
 {$pknodo \in$ pokenodos($pgo$)}
-
-\tadOperacion{pknodosCapturables}{pGo}{conj(pknodo)}{}
 
 \tadOperacion{manejarCapturas}{pGo/pgo, jugador/j}{pGo}
 {$j \in$jugadores($pgo$) $\land$ conectado($j$) $\land$ $\neg$eliminado($j$)}
 
-\tadOperacion{aplicarSancion}{pGo/pgo,jugador/j}{pGo}
-{$j \in$ jugadores($pgo$)} 
-
 $ $\newline
 
 \tadOperacion{actualizarPknodos}{pGo/pgo,jugador/j}{pGo}
-{$j \in$ jugadores($pgo$)}
-
+{$j \in$ jugadores($pgo$)}	
 \tadOperacion{realizaCapturas}{pGo}{pGo}{}
 \tadOperacion{capturarPorNodo}{pGo,conj(pknodo)}{pGo}{}
 \tadOperacion{eliminarPokenodos}{pGo}{pGo}{}
-
 \tadOperacion{jugElegido}{pGo/pgo, PkNodo/pknodo}{jugador}
 {$pknodo \in$ pokenodos($pgo$) $\yluego$ jugadoresEnRango($pgo$, $pknodo$) $\neq \emptyset$ }
 
+
 $ $\newline
-\tadOperacion{posicionJug}{jugador/j}{coordenada}{$j \in$ jugadores($pgo$) $\land$ $\neg$eliminado($j$) $\land$ conectado(j)}
-
-
 \tadOperacion{cuentaTotalPokemones}{pGo}{Nat}{}
 \tadOperacion{cuentaTipoPokemones}{pGo, pokemon/q}{Nat}{}
-\tadOperacion{indDeRareza}{pGo/pgo, pokemon/q}{Nat}{cuentaTotalPokemones($pgo$) > \hspace{1mm}0}
 \tadOperacion{divEntera}{Nat/n, Nat/m}{Nat}{m >\hspace{1mm}0}
+\tadOperacion{indDeRareza}{pGo/pgo, pokemon/q}{Nat}
+{cuentaTotalPokemones($pgo$) > \hspace{1mm}0}
 
-%Devuelve los nombresJugadores de todos los jugadores
-\tadOperacion{nombresJugadores}{pGo}{conj(string)}{}
 \tadAxiomas[\paratodo{pGo}{pgo}]
 
 %\tadAlinearAxiomas{}
